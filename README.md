@@ -14,7 +14,6 @@
 - [Dataset Description](#dataset-description)
 - [Big Data Characteristics (5V)](#big-data-characteristics-5v)
 - [Key Insights](#key-insights)
-- [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
 
 ---
