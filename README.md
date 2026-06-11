@@ -42,7 +42,7 @@ Proyek ini merupakan **analisis big data komprehensif** tentang persepsi, sentim
 | **Google Trends** | Keyword trends dan search patterns | Google Trends API |
 
 ### Timeline Data
-- **Periode:** Mei 2023 - Desember 2024
+- **Periode:** 2011 - 2026
 - **Total Records:** 4,296 records
 - **Update Frequency:** Monthly
 
