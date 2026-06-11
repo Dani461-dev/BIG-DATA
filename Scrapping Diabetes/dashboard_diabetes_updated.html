@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DiabetaLens — Analisis 8V Big Data Diabetes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #F7F5F2;
+  --surface: #FFFFFF;
+  --surface-2: #F2EFEC;
+  --border: rgba(180,140,120,0.2);
+  --border-strong: rgba(180,140,120,0.4);
+
+  --blood: #8B1A1A;
+  --blood-2: #6B1414;
+  --blood-light: #C0392B;
+  --pulse: #E8365D;
+  --navy: #1C1C2E;
+  --navy-2: #14142B;
+  --amber: #F5A623;
+  --amber-light: #FDD878;
+  --teal: #0D9488;
+  --teal-light: #5EEAD4;
+  --violet: #6D28D9;
+  --green: #059669;
+
+  --text-1: #1C1C2E;
+  --text-2: #3D3552;
+  --text-3: #7A6E8A;
+  --text-4: #B0A8C0;
+
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 4px rgba(28,28,46,0.06);
+  --shadow: 0 4px 20px rgba(28,28,46,0.09);
+  --shadow-lg: 0 12px 48px rgba(28,28,46,0.13);
+  --nav-h: 64px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text-1); overflow-x: hidden; min-height: 100vh; }
+
+/* ── NOISE TEXTURE ── */
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E"); pointer-events:none; z-index:9999; opacity:0.35; }
+
+/* ── NAV ── */
+nav { position:fixed; top:0; left:0; right:0; z-index:1000; height:var(--nav-h); background:rgba(247,245,242,0.92); backdrop-filter:blur(20px) saturate(1.6); -webkit-backdrop-filter:blur(20px) saturate(1.6); border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 2rem; gap:0; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; flex-shrink:0; }
+.nav-logo-mark { width:36px; height:36px; background:linear-gradient(135deg, var(--blood), var(--pulse)); border-radius:10px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px rgba(139,26,26,0.35); flex-shrink:0; }
+.nav-logo-mark svg { width:20px; height:20px; }
+.nav-logo-name { font-family:var(--font-display); font-size:1.15rem; color:var(--navy); letter-spacing:-0.01em; line-height:1; }
+.nav-logo-sub { font-size:0.58rem; color:var(--text-3); letter-spacing:0.14em; text-transform:uppercase; font-weight:500; }
+.nav-divider { width:1px; height:22px; background:var(--border-strong); margin:0 1.5rem; flex-shrink:0; }
+.nav-links { display:flex; align-items:center; gap:2px; flex:1; }
+.nav-link { padding:6px 11px; border-radius:var(--radius-sm); font-size:0.81rem; font-weight:500; color:var(--text-2); cursor:pointer; transition:all 0.18s; border:none; background:none; white-space:nowrap; font-family:var(--font-body); }
+.nav-link:hover { background:rgba(139,26,26,0.07); color:var(--blood); }
+.nav-link.active { background:rgba(139,26,26,0.1); color:var(--blood); font-weight:600; }
+.nav-badge { margin-left:auto; background:linear-gradient(135deg, var(--blood), var(--pulse)); color:white; font-size:0.65rem; padding:4px 11px; border-radius:20px; font-weight:700; letter-spacing:0.06em; flex-shrink:0; box-shadow:0 4px 12px rgba(139,26,26,0.3); }
+
+/* ── LAYOUT ── */
+main { padding-top:var(--nav-h); }
+.page { display:none; }
+.page.active { display:block; }
+.section { max-width:1280px; margin:0 auto; padding:3.5rem 2.5rem; }
+.section-head { margin-bottom:2rem; }
+.section-eyebrow { font-size:0.68rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--blood); margin-bottom:0.5rem; }
+.section-title { font-family:var(--font-display); font-size:clamp(1.6rem,3vw,2.1rem); color:var(--navy); letter-spacing:-0.02em; line-height:1.2; }
+.section-sub { font-size:0.86rem; color:var(--text-3); margin-top:0.5rem; }
+
+/* ── HERO ── */
+.hero { position:relative; background:linear-gradient(150deg, var(--navy-2) 0%, var(--navy) 45%, #2A1520 80%, var(--blood-2) 100%); padding:6.5rem 2.5rem 4.5rem; overflow:hidden; }
+.hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size:50px 50px; pointer-events:none; }
+.hero::before { content:''; position:absolute; top:-10%; right:-5%; width:600px; height:600px; background:radial-gradient(ellipse, rgba(232,54,93,0.12) 0%, transparent 65%); border-radius:50%; pointer-events:none; }
+.hero::after { content:''; position:absolute; bottom:-20%; left:5%; width:400px; height:400px; background:radial-gradient(ellipse, rgba(139,26,26,0.2) 0%, transparent 65%); border-radius:50%; pointer-events:none; }
+.hero-content { position:relative; z-index:2; max-width:1280px; margin:0 auto; }
+.hero-badge { display:inline-flex; align-items:center; gap:7px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.05); padding:5px 14px; border-radius:20px; font-size:0.7rem; color:rgba(255,255,255,0.65); letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-bottom:1.6rem; }
+.hero-badge-dot { width:6px; height:6px; background:var(--pulse); border-radius:50%; animation:pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.4)} }
+.hero h1 { font-family:var(--font-display); font-size:clamp(2.4rem,5vw,4rem); color:white; line-height:1.1; letter-spacing:-0.02em; margin-bottom:1.1rem; }
+.hero h1 em { font-style:italic; background:linear-gradient(90deg, #F87171, var(--pulse)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-desc { font-size:0.97rem; color:rgba(255,255,255,0.55); max-width:520px; line-height:1.8; margin-bottom:3rem; font-weight:300; }
+
+/* ECG PULSE ANIMATION */
+.hero-ecg { position:absolute; right:5%; top:50%; transform:translateY(-50%); opacity:0.18; width:380px; pointer-events:none; }
+.ecg-path { stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: draw-ecg 3s ease-in-out infinite; }
+@keyframes draw-ecg { 0%{stroke-dashoffset:1200;opacity:0} 20%{opacity:1} 70%{stroke-dashoffset:0;opacity:1} 100%{stroke-dashoffset:-200;opacity:0} }
+
+.hero-kpis { display:flex; gap:0; border:1px solid rgba(255,255,255,0.08); border-radius:var(--radius-lg); background:rgba(255,255,255,0.04); overflow:hidden; width:fit-content; max-width:100%; flex-wrap:wrap; }
+.hero-kpi { padding:1.3rem 1.9rem; border-right:1px solid rgba(255,255,255,0.07); min-width:130px; }
+.hero-kpi:last-child { border-right:none; }
+.hero-kpi-val { font-family:var(--font-display); font-size:1.9rem; color:white; line-height:1; letter-spacing:-0.03em; }
+.hero-kpi-val sup { font-size:1rem; color:var(--pulse); }
+.hero-kpi-label { font-size:0.65rem; color:rgba(255,255,255,0.38); text-transform:uppercase; letter-spacing:0.1em; margin-top:5px; font-weight:500; }
+
+/* ── CARDS ── */
+.card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.5rem; box-shadow:var(--shadow-sm); transition:box-shadow 0.25s, transform 0.25s; }
+.card:hover { box-shadow:var(--shadow); transform:translateY(-2px); }
+.card-title { font-family:var(--font-display); font-size:1rem; color:var(--navy); margin-bottom:0.25rem; letter-spacing:-0.01em; }
+.card-sub { font-size:0.76rem; color:var(--text-3); margin-bottom:1.2rem; line-height:1.5; }
+
+/* ── GRID ── */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+.grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; }
+
+/* ── METRIC CARDS ── */
+.metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.3rem 1.5rem; position:relative; overflow:hidden; transition:all 0.25s; box-shadow:var(--shadow-sm); }
+.metric-card:hover { box-shadow:var(--shadow); transform:translateY(-2px); }
+.metric-bar { position:absolute; top:0; left:0; right:0; height:3px; border-radius:var(--radius-lg) var(--radius-lg) 0 0; }
+.metric-icon { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:0.8rem; }
+.metric-icon svg { width:18px; height:18px; }
+.metric-val { font-family:var(--font-display); font-size:1.9rem; color:var(--navy); line-height:1; letter-spacing:-0.03em; }
+.metric-label { font-size:0.68rem; color:var(--text-3); text-transform:uppercase; letter-spacing:0.08em; font-weight:600; margin-top:4px; }
+.metric-note { font-size:0.72rem; color:var(--text-4); margin-top:3px; }
+
+/* ── 8V CARDS ── */
+.v-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; transition:all 0.25s; box-shadow:var(--shadow-sm); }
+.v-card:hover { box-shadow:var(--shadow-lg); transform:translateY(-3px); }
+.v-card-header { padding:1.3rem 1.3rem 0.9rem; position:relative; }
+.v-num { font-size:0.6rem; font-weight:800; letter-spacing:0.22em; text-transform:uppercase; opacity:0.45; margin-bottom:0.35rem; font-family:var(--font-mono); }
+.v-title { font-family:var(--font-display); font-size:1.25rem; color:var(--navy); letter-spacing:-0.02em; }
+.v-stat { font-family:var(--font-display); font-size:1.9rem; line-height:1; letter-spacing:-0.04em; margin:0.55rem 0 0.15rem; }
+.v-stat-label { font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; opacity:0.5; }
+.v-desc { font-size:0.78rem; color:var(--text-2); line-height:1.7; padding:0.9rem 1.3rem 1.3rem; border-top:1px solid var(--border); }
+.v-stripe { height:4px; width:100%; }
+
+/* ── STATUS BADGE ── */
+.badge { display:inline-flex; align-items:center; gap:5px; padding:3px 10px; border-radius:20px; font-size:0.67rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; }
+.badge-red { background:rgba(139,26,26,0.1); color:var(--blood); }
+.badge-amber { background:rgba(245,166,35,0.12); color:#b45309; }
+.badge-green { background:rgba(5,150,105,0.1); color:var(--green); }
+.badge-navy { background:rgba(28,28,46,0.08); color:var(--navy); }
+.badge-violet { background:rgba(109,40,217,0.1); color:var(--violet); }
+.badge-teal { background:rgba(13,148,136,0.1); color:var(--teal); }
+.badge-dot { width:5px; height:5px; border-radius:50%; background:currentColor; }
+
+/* ── PLATFORM ROW ── */
+.platform-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.5rem; display:flex; align-items:center; gap:1.2rem; box-shadow:var(--shadow-sm); transition:all 0.22s; }
+.platform-card:hover { box-shadow:var(--shadow); transform:translateY(-2px); }
+.platform-icon { width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.4rem; }
+.platform-name { font-family:var(--font-display); font-size:1.05rem; color:var(--navy); }
+.platform-count { font-family:var(--font-display); font-size:1.6rem; color:var(--navy); line-height:1; letter-spacing:-0.03em; margin-top:2px; }
+.platform-meta { font-size:0.72rem; color:var(--text-3); margin-top:2px; }
+
+/* ── TOPIC TAG ── */
+.topic-tag { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; background:var(--surface-2); border:1px solid var(--border); border-radius:20px; font-size:0.75rem; color:var(--text-2); font-weight:500; margin:3px; }
+.topic-dot { width:8px; height:8px; border-radius:50%; }
+
+/* ── PROGRESS ── */
+.progress-row { margin-bottom:1rem; }
+.progress-header { display:flex; justify-content:space-between; margin-bottom:5px; }
+.progress-label { font-size:0.78rem; font-weight:500; color:var(--text-1); }
+.progress-val { font-family:var(--font-mono); font-size:0.75rem; font-weight:600; }
+.progress-track { height:6px; background:var(--surface-2); border-radius:10px; overflow:hidden; }
+.progress-fill { height:100%; border-radius:10px; transition:width 1.2s cubic-bezier(0.16,1,0.3,1); }
+
+/* ── CHART WRAPS ── */
+.chart-wrap { position:relative; width:100%; height:270px; }
+.chart-wrap-sm { height:180px; }
+.chart-wrap-lg { height:360px; }
+.chart-wrap-xl { height:440px; }
+
+/* ── DIVIDER ── */
+.divider { height:1px; background:linear-gradient(90deg, transparent, var(--border-strong), transparent); margin:2rem 0; }
+
+/* ── INFO BOX ── */
+.info-box { background:linear-gradient(135deg, rgba(139,26,26,0.04), rgba(232,54,93,0.04)); border:1px solid rgba(139,26,26,0.12); border-radius:var(--radius-lg); padding:1.3rem 1.6rem; }
+.info-box-title { font-weight:700; color:var(--navy); font-size:0.9rem; margin-bottom:0.4rem; }
+
+/* ── DUMMY NOTICE ── */
+.dummy-notice { display:inline-flex; align-items:center; gap:6px; background:rgba(245,166,35,0.1); border:1px solid rgba(245,166,35,0.3); border-radius:8px; padding:4px 12px; font-size:0.7rem; color:#92400e; font-weight:600; letter-spacing:0.04em; margin-bottom:0.8rem; }
+
+/* ── FOOTER ── */
+footer { background:var(--navy); padding:2.5rem; margin-top:4rem; }
+.footer-inner { max-width:1280px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+.footer-brand { font-family:var(--font-display); font-size:1.1rem; color:white; }
+.footer-brand span { font-size:0.7rem; color:rgba(255,255,255,0.3); display:block; font-family:var(--font-body); font-weight:400; letter-spacing:0.05em; margin-top:3px; }
+.footer-meta { font-size:0.73rem; color:rgba(255,255,255,0.3); text-align:right; line-height:1.9; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+.fade-up { animation:fadeUp 0.55s cubic-bezier(0.16,1,0.3,1) both; }
+.delay-1{animation-delay:0.06s}.delay-2{animation-delay:0.12s}.delay-3{animation-delay:0.18s}.delay-4{animation-delay:0.24s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px) {
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .hero{padding:5rem 1.5rem 3rem}
+  .section{padding:2.5rem 1.5rem}
+  .hero-kpis{flex-direction:column}
+  .hero-kpi{border-right:none;border-bottom:1px solid rgba(255,255,255,0.07)}
+  .hero-ecg{display:none}
+}
+@media(max-width:600px) {
+  .grid-2{grid-template-columns:1fr}
+  .grid-4{grid-template-columns:1fr 1fr}
+}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:rgba(139,26,26,0.3);border-radius:10px}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="nav-logo" href="#" onclick="showPage('overview');return false">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 12h3l2-7 4 14 3-9 2 5 2-3h2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="nav-logo-name">DiabetaLens</div>
+      <div class="nav-logo-sub">Big Data · Persepsi Publik</div>
+    </div>
+  </a>
+  <div class="nav-divider"></div>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showPage('overview')">Overview</button>
+    <button class="nav-link" onclick="showPage('8v')">8V Analysis</button>
+    <button class="nav-link" onclick="showPage('platform')">Platform Data</button>
+    <button class="nav-link" onclick="showPage('tren')">Tren Temporal</button>
+    <button class="nav-link" onclick="showPage('temuan')">Temuan</button>
+  </div>
+  <div class="nav-badge">Skripsi 2025</div>
+</nav>
+
+<main>
+
+<!-- ══════ PAGE: OVERVIEW ══════ -->
+<div id="page-overview" class="page active">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <!-- ECG decoration -->
+    <svg class="hero-ecg" viewBox="0 0 380 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path class="ecg-path" d="M0 60 L60 60 L75 60 L85 20 L95 100 L105 10 L115 90 L125 60 L180 60 L195 50 L205 70 L215 60 L260 60 L270 30 L278 80 L286 40 L294 60 L340 60 L355 60 L380 60"
+        stroke="#E8365D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+    <div class="hero-content">
+      <div class="hero-badge fade-up"><div class="hero-badge-dot"></div> Analisis Persepsi Publik · Diabetes</div>
+      <h1 class="fade-up delay-1">Diabetes di Mata<br>Masyarakat — <em>8 Dimensi</em></h1>
+      <p class="hero-desc fade-up delay-2">Studi big data persepsi publik tentang diabetes mellitus melalui analisis komentar YouTube, cuitan X (Twitter), unggahan Threads, dan tren pencarian Google — Maret hingga Juni 2025.</p>
+      <div class="hero-kpis fade-up delay-3">
+        <div class="hero-kpi">
+          <div class="hero-kpi-val">99.564</div>
+          <div class="hero-kpi-label">Total Data Terkumpul</div>
+        </div>
+        <div class="hero-kpi">
+          <div class="hero-kpi-val">3.640</div>
+          <div class="hero-kpi-label">Komentar YouTube</div>
+        </div>
+        <div class="hero-kpi">
+          <div class="hero-kpi-val">10.782</div>
+          <div class="hero-kpi-label">Tweet / X</div>
+        </div>
+        <div class="hero-kpi">
+          <div class="hero-kpi-val">4</div>
+          <div class="hero-kpi-label">Platform Sumber</div>
+        </div>
+        <div class="hero-kpi">
+          <div class="hero-kpi-val">Mar–Jun</div>
+          <div class="hero-kpi-label">Rentang Waktu 2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: RINGKASAN -->
+  <div class="section">
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Gambaran Umum</div>
+      <div class="section-title">Persepsi Publik tentang Diabetes</div>
+      <div class="section-sub">Data dari 4 platform digital — analisis periode Maret–Juni 2025</div>
+    </div>
+
+    <!-- KPI row -->
+    <div class="grid-4 fade-up">
+      <div class="metric-card">
+        <div class="metric-bar" style="background:linear-gradient(90deg,#8B1A1A,#E8365D)"></div>
+        <div class="metric-icon" style="background:rgba(139,26,26,0.08)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#8B1A1A" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="metric-val">3.640</div>
+        <div class="metric-label">Komentar YouTube</div>
+        <div class="metric-note">Data real · 25 topik video</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-bar" style="background:linear-gradient(90deg,#1C1C2E,#6D28D9)"></div>
+        <div class="metric-icon" style="background:rgba(28,28,46,0.07)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+        </div>
+        <div class="metric-val">10.782</div>
+        <div class="metric-label">Tweet / X</div>
+        <div class="metric-note">Data real · 2016–2026</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-bar" style="background:linear-gradient(90deg,#0D9488,#5EEAD4)"></div>
+        <div class="metric-icon" style="background:rgba(13,148,136,0.08)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2"><path d="M21 2H3v16h5v4l4-4h9V2z"/></svg>
+        </div>
+        <div class="metric-val">1.362</div>
+        <div class="metric-label">Unggahan Threads</div>
+        <div class="metric-note">Data real · Feb 2024–Mei 2026</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-bar" style="background:linear-gradient(90deg,#F5A623,#FDD878)"></div>
+        <div class="metric-icon" style="background:rgba(245,166,35,0.1)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="metric-val">20</div>
+        <div class="metric-label">Kata Kunci Trends</div>
+        <div class="metric-note">Data real · Google Trends</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Platform status -->
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Status Pengumpulan Data</div>
+      <div class="section-title">Sumber Data per Platform</div>
+    </div>
+    <div class="grid-4 fade-up">
+      <div class="platform-card">
+        <div class="platform-icon" style="background:rgba(139,26,26,0.08); font-size:1.3rem;">▶️</div>
+        <div>
+          <div class="platform-name">YouTube</div>
+          <div class="platform-count">3.640</div>
+          <div class="platform-meta">komentar · 25 topik video</div>
+          <div style="margin-top:6px"><span class="badge badge-green"><span class="badge-dot"></span> Selesai</span></div>
+        </div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon" style="background:rgba(109,40,217,0.07); font-size:1.3rem;">𝕏</div>
+        <div>
+          <div class="platform-name">X / Twitter</div>
+          <div class="platform-count">10.782</div>
+          <div class="platform-meta">tweet · 2016–2026</div>
+          <div style="margin-top:6px"><span class="badge badge-green"><span class="badge-dot"></span> Selesai</span></div>
+        </div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon" style="background:rgba(13,148,136,0.07); font-size:1.3rem;">🧵</div>
+        <div>
+          <div class="platform-name">Threads</div>
+          <div class="platform-count">1.362</div>
+          <div class="platform-meta">unggahan · Feb 2024–Mei 2026</div>
+          <div style="margin-top:6px"><span class="badge badge-green"><span class="badge-dot"></span> Selesai</span></div>
+        </div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon" style="background:rgba(245,166,35,0.08); font-size:1.3rem;">📈</div>
+        <div>
+          <div class="platform-name">Google Trends</div>
+          <div class="platform-count">83.780</div>
+          <div class="platform-meta">data poin · 20 kata kunci</div>
+          <div style="margin-top:6px"><span class="badge badge-green"><span class="badge-dot"></span> Selesai</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Topik YouTube -->
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">YouTube — Distribusi Topik</div>
+      <div class="section-title">Sebaran Komentar per Topik Video</div>
+    </div>
+    <div class="grid-2 fade-up">
+      <div class="card">
+        <div class="card-title">Jumlah Komentar per Topik</div>
+        <div class="card-sub">5 kategori video diabetes · total 3.640 komentar</div>
+        <div class="chart-wrap"><canvas id="chartTopik"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Tren Komentar 2024–2026</div>
+        <div class="card-sub">Volume komentar YouTube berdasarkan tanggal posting</div>
+        <div class="chart-wrap"><canvas id="chartTren"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Info research -->
+    <div class="info-box fade-up" style="margin-top:1.2rem">
+      <div class="info-box-title">🎯 Tujuan Penelitian</div>
+      <p style="font-size:0.84rem;color:var(--text-2);line-height:1.75;margin-top:0.3rem">
+        Menganalisis persepsi masyarakat Indonesia terhadap diabetes mellitus menggunakan pendekatan <strong>8V Big Data</strong> (Volume, Velocity, Variety, Veracity, Value, Variability, Visualization, Vulnerability) dari data media sosial dan pencarian online periode Maret–Juni 2025. Penelitian ini mengidentifikasi pola pemahaman, kekhawatiran, dan informasi yang beredar di ruang digital.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ PAGE: 8V ANALYSIS ══════ -->
+<div id="page-8v" class="page">
+  <div class="hero" style="padding:3.5rem 2.5rem 2.5rem">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge fade-up"><div class="hero-badge-dot"></div> Framework Analisis</div>
+      <h1 class="fade-up delay-1" style="font-size:clamp(2rem,4vw,3.2rem)">8V Big Data<br><em>Diabetes di Media Sosial</em></h1>
+      <p class="hero-desc fade-up delay-2">Delapan dimensi analisis big data — diterapkan pada percakapan publik seputar diabetes di YouTube, X, Threads, dan Google Trends.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="grid-2 fade-up">
+
+      <!-- V1 Volume -->
+      <div class="v-card">
+        <div class="v-stripe" style="background:linear-gradient(90deg,#8B1A1A,#E8365D)"></div>
+        <div class="v-card-header">
+          <div class="v-num" style="color:#8B1A1A">V1</div>
+          <div class="v-title">Volume</div>
+          <div class="v-stat" style="color:#8B1A1A">99.564</div>
+          <div class="v-stat-label" style="color:#8B1A1A">Total Data Terkumpul</div>
+        </div>
+        <div class="v-desc">
+          YouTube: <strong>3.640 komentar</strong> dari 25 topik video · X/Twitter: <strong>10.782 tweet</strong> (2016–2026) · Threads: <strong>1.362 unggahan</strong> (Feb 2024–Mei 2026) · Google Trends: <strong>83.780 data poin</strong> dari 20 kata kunci. Total <strong>99.564 baris data</strong> mencakup rentang waktu 2015–2026. Volume menunjukkan tingginya atensi publik terhadap topik diabetes di platform digital Indonesia.
+        </div>
+        <div style="padding:0 1.3rem 1.3rem">
+          <div class="chart-wrap-sm"><canvas id="chartV1"></canvas></div>
+        </div>
+      </div>
+
+      <!-- V2 Velocity -->
+      <div class="v-card">
+        <div class="v-stripe" style="background:linear-gradient(90deg,#6D28D9,#A78BFA)"></div>
+        <div class="v-card-header">
+          <div class="v-num" style="color:#6D28D9">V2</div>
+          <div class="v-title">Velocity</div>
+          <div class="v-stat" style="color:#6D28D9">~28</div>
+          <div class="v-stat-label" style="color:#6D28D9">Tweet X / Hari (rata-rata 2025)</div>
+        </div>
+        <div class="v-desc">
+          Laju aliran data bervariasi per platform: YouTube puncak di <strong>Mar 2024 (33 komentar)</strong>; X/Twitter aktif konsisten rata-rata <strong>63 tweet/bulan</strong> di 2025 (puncak Jan: 93); Threads melonjak di <strong>Feb 2026 (558 unggahan)</strong>; Google Trends konsisten <strong>600+ data poin/bulan</strong>. Velocity menunjukkan diabetes adalah topik yang terus diperbincangkan, bukan musiman.
+        </div>
+        <div style="padding:0 1.3rem 1.3rem">
+          <div class="chart-wrap-sm"><canvas id="chartV2"></canvas></div>
+        </div>
+      </div>
+
+      <!-- V3 Variety -->
+      <div class="v-card">
+        <div class="v-stripe" style="background:linear-gradient(90deg,#0D9488,#5EEAD4)"></div>
+        <div class="v-card-header">
+          <div class="v-num" style="color:#0D9488">V3</div>
+          <div class="v-title">Variety</div>
+          <div class="v-stat" style="color:#0D9488">4</div>
+          <div class="v-stat-label" style="color:#0D9488">Jenis Platform / Format Data</div>
+        </div>
+        <div class="v-desc">
+          Data mencakup: <strong>teks panjang</strong> (komentar YouTube, rata-rata 100 karakter), <strong>teks pendek</strong> (tweet &lt;280 karakter), <strong>teks menengah</strong> (unggahan Threads), dan <strong>data numerik</strong> (indeks tren Google). Tiap format membawa karakteristik linguistik dan ekspresi persepsi yang berbeda.
+        </div>
+        <div style="padding:0 1.3rem 1.3rem">
+          <div class="chart-wrap-sm"><canvas id="chartV3"></canvas></div>
+        </div>
+      </div>
+
+      <!-- V4 Veracity -->
+      <div class="v-card">
+        <div class="v-stripe" style="background:linear-gradient(90deg,#F5A623,#FDD878)"></div>
+        <div class="v-card-header">
+          <div class="v-num" style="color:#b45309">V4</div>
+          <div class="v-title">Veracity</div>
+          <div class="v-stat" style="color:#b45309">87%</div>
+          <div class="v-stat-label" style="color:#b45309">Estimasi Data Relevan</div>
+        </div>
+        <div class="v-desc">
+          Tantangan kualitas data: komentar spam (~8%), komentar off-topic (~5%), dan bahasa informal/singkatan Bahasa Indonesia yang ambigu (~15%). Proses cleaning mencakup: hapus HTML tag, normalisasi teks, filter komentar duplikat (7 duplikat dihapus). Data YouTube terverifikasi dari kanal kesehatan bersubscriber 50K–2M.
+        </div>
+        <div style="padding:0 1.3rem 1.3rem">
+          <div class="chart-wrap-sm"><canvas id="chartV4"></canvas></div>
+        </div>
+      </div>
+
+      <!-- V5 Value -->
+      <div class="v-card">
+        <div class="v-stripe" style="background:linear-gradient(90deg,#059669,#34D399)"></div>
+        <div class="v-card-header">
+          <div class="v-num" style="color:#059669">V5</div>
+          <div class="v-title">Value</div>
+          <div class="v-stat" style="color:#059669">3 Tema</div>
+          <div class="v-stat-label" style="color:#059669">Klaster Persepsi Utama</div>
+        </div>
+        <div class="v-desc">
+          Nilai insight yang diekstrak: (1) <strong>Kekhawatiran & gejala</strong> — masyarakat sering bertanya soal gejala awal; (2) <strong>Pengobatan & diet</strong> — diskusi obat herbal vs medis sangat aktif; (3) <strong>Dukungan sosial</strong> — banyak penyintas berbagi pengalaman. Nilai utama: peta literasi kesehatan masyarakat tentang diabetes.
+        </div>
+        <div style="padding:0 1.3rem 1.3rem">
+          <div class="dummy-notice">⚠ Klaster = estimasi dummy</div>
+          <div class="chart-wrap-sm"><canvas id="chartV5"></canvas></div>
+        </div>
+      </div>
+
+      <!-- V6 Variability -->
+      <div class="v-card">
+        <div class="v-stripe" style="background:linear-gradient(90deg,#E8365D,#F97316)"></div>
+        <div class="v-card-header">
+          <div class="v-num" style="color:#c0392b">V6</div>
+          <div class="v-title">Variability</div>
+          <div class="v-stat" style="color:#c0392b">1–3.493</div>
+          <div class="v-stat-label" style="color:#c0392b">Rentang Panjang Komentar (karakter)</div>
+        </div>
+        <div class="v-desc">
+          Variabilitas tinggi pada panjang komentar YouTube: median <strong>58 karakter</strong>, rata-rata <strong>102 karakter</strong>, maksimum <strong>3.493 karakter</strong>. Distribusi like sangat skewed: 75% komentar mendapat 0 like, tertinggi <strong>565 like</strong>, rata-rata 1,82. Total like terkumpul: <strong>6.637</strong>. Variabilitas per topik berbeda: video "penjelasan klinis" cenderung panjang, video "gejala" lebih singkat dan emosional.
+        </div>
+        <div style="padding:0 1.3rem 1.3rem">
+          <div class="chart-wrap-sm"><canvas id="chartV6"></canvas></div>
+        </div>
+      </div>
+
+      <!-- V7 Visualization -->
+      <div class="v-card">
+        <div class="v-stripe" style="background:linear-gradient(90deg,#1C1C2E,#6D28D9)"></div>
+        <div class="v-card-header">
+          <div class="v-num" style="color:#4338ca">V7</div>
+          <div class="v-title">Visualization</div>
+          <div class="v-stat" style="color:#4338ca">8+</div>
+          <div class="v-stat-label" style="color:#4338ca">Jenis Visualisasi</div>
+        </div>
+        <div class="v-desc">
+          Dashboard ini menyajikan: bar chart distribusi topik, line chart tren temporal, donut chart komposisi platform, scatter plot variabilitas komentar, heatmap aktivitas per bulan, word cloud tema utama*, radar chart 8V score, dan progress bar tingkat penyelesaian data. Visualisasi dirancang untuk presentasi skripsi.
+        </div>
+        <div style="padding:0 1.3rem 1.3rem">
+          <div class="chart-wrap-sm"><canvas id="chartV7"></canvas></div>
+        </div>
+      </div>
+
+      <!-- V8 Vulnerability -->
+      <div class="v-card">
+        <div class="v-stripe" style="background:linear-gradient(90deg,#14142B,#1C1C2E)"></div>
+        <div class="v-card-header">
+          <div class="v-num" style="color:#1C1C2E">V8</div>
+          <div class="v-title">Vulnerability</div>
+          <div class="v-stat" style="color:#1C1C2E">⚠ 3</div>
+          <div class="v-stat-label" style="color:#1C1C2E">Risiko Etika & Privasi</div>
+        </div>
+        <div class="v-desc">
+          Kerentanan yang diidentifikasi: (1) <strong>Privasi pengguna</strong> — data komentar publik namun mengandung informasi kesehatan sensitif; (2) <strong>Misinformasi</strong> — beredarnya klaim pengobatan tidak terverifikasi di komentar; (3) <strong>Bias platform</strong> — pengguna YouTube cenderung lebih tua dari pengguna Threads. Semua data diproses secara anonim.
+        </div>
+        <div style="padding:0 1.3rem 1.3rem">
+          <div class="chart-wrap-sm"><canvas id="chartV8"></canvas></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 8V Radar -->
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Skor 8V</div>
+      <div class="section-title">Radar Kematangan Big Data</div>
+      <div class="section-sub">Penilaian kualitatif tiap dimensi V berdasarkan data yang tersedia saat ini</div>
+    </div>
+    <div class="grid-2 fade-up">
+      <div class="card">
+        <div class="card-title">Radar Skor 8V — DiabetaLens</div>
+        <div class="card-sub">Skala 0–10 · skor saat ini (data parsial) vs target akhir</div>
+        <div class="chart-wrap-lg"><canvas id="chartRadar8V"></canvas></div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:0.5rem">
+        <div class="card-title">Ringkasan Skor per Dimensi</div>
+        <div class="card-sub">Progres pengumpulan dan analisis data</div>
+        <div id="progress8v" style="margin-top:0.5rem"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ PAGE: PLATFORM DATA ══════ -->
+<div id="page-platform" class="page">
+  <div class="hero" style="padding:3.5rem 2.5rem 2.5rem">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge fade-up"><div class="hero-badge-dot"></div> Data Platform</div>
+      <h1 class="fade-up delay-1" style="font-size:clamp(2rem,4vw,3.2rem)">Analisis per Platform<br><em>YouTube, X, Threads, Trends</em></h1>
+      <p class="hero-desc fade-up delay-2">Profil data dari tiap sumber — karakteristik, distribusi topik, dan pola engagement yang ditemukan.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <!-- YouTube - DATA REAL -->
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Platform 1 — Data Real</div>
+      <div class="section-title">YouTube · Komentar Diabetes</div>
+      <div class="section-sub">3.640 komentar · 25 topik video · 5 kategori</div>
+    </div>
+    <div class="grid-4 fade-up">
+      <div class="metric-card">
+        <div class="metric-bar" style="background:linear-gradient(90deg,#8B1A1A,#E8365D)"></div>
+        <div class="metric-icon" style="background:rgba(139,26,26,0.08)"><svg viewBox="0 0 24 24" fill="none" stroke="#8B1A1A" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <div class="metric-val">3.640</div>
+        <div class="metric-label">Total Komentar</div>
+        <div class="metric-note">Setelah dedup & merge</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-bar" style="background:linear-gradient(90deg,#6D28D9,#A78BFA)"></div>
+        <div class="metric-icon" style="background:rgba(109,40,217,0.07)"><svg viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div>
+        <div class="metric-val">25</div>
+        <div class="metric-label">Topik Video</div>
+        <div class="metric-note">5 kategori besar</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-bar" style="background:linear-gradient(90deg,#F5A623,#FDD878)"></div>
+        <div class="metric-icon" style="background:rgba(245,166,35,0.1)"><svg viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <div class="metric-val">6.637</div>
+        <div class="metric-label">Total Like</div>
+        <div class="metric-note">Rata-rata 1,82 per komentar</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-bar" style="background:linear-gradient(90deg,#059669,#34D399)"></div>
+        <div class="metric-icon" style="background:rgba(5,150,105,0.08)"><svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="metric-val">58</div>
+        <div class="metric-label">Median Panjang</div>
+        <div class="metric-note">karakter per komentar</div>
+      </div>
+    </div>
+
+    <div class="grid-2 fade-up" style="margin-top:1.2rem">
+      <div class="card">
+        <div class="card-title">Distribusi Komentar per Topik</div>
+        <div class="card-sub">Proporsi tiap kategori topik video diabetes</div>
+        <div class="chart-wrap"><canvas id="chartYTTopikDonut"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Distribusi Panjang Komentar</div>
+        <div class="card-sub">Histogram binning per 50 karakter · data real YouTube</div>
+        <div class="chart-wrap"><canvas id="chartKomentarLen"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Topik tags -->
+    <div class="card fade-up" style="margin-top:1.2rem">
+      <div class="card-title">Kategori Topik Video</div>
+      <div class="card-sub">Label topik dari proses scraping dan merge dataset · total 3.640 komentar</div>
+      <div style="margin-top:0.8rem">
+        <span class="topic-tag"><span class="topic-dot" style="background:#8B1A1A"></span> Penjelasan Diabetes Mellitus · 1.500 komentar</span>
+        <span class="topic-tag"><span class="topic-dot" style="background:#6D28D9"></span> Penjelasan Klinis · 696 komentar</span>
+        <span class="topic-tag"><span class="topic-dot" style="background:#0D9488"></span> Pencegahan & Penanganan · 470 komentar</span>
+        <span class="topic-tag"><span class="topic-dot" style="background:#F5A623"></span> Jenis Tipe 1 & 2 · 250 komentar</span>
+        <span class="topic-tag"><span class="topic-dot" style="background:#E8365D"></span> Gejala & Penyebab · 724 komentar</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- X / Twitter - DATA REAL -->
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Platform 2 — Data Real</div>
+      <div class="section-title">X / Twitter · Tweet Diabetes</div>
+      <div class="section-sub">10.782 tweet · topik: diabetes · 2016–2026</div>
+    </div>
+    <div class="grid-2 fade-up">
+      <div class="card">
+        <div class="card-title">Volume Tweet per Bulan (2025)</div>
+        <div class="card-sub">Distribusi tweet X/Twitter tentang diabetes sepanjang 2025</div>
+        <div class="chart-wrap"><canvas id="chartXMonthly"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Distribusi Sentimen Tweet</div>
+        <div class="card-sub">Estimasi proporsi positif / negatif / netral dari topik diabetes</div>
+        <div class="chart-wrap"><canvas id="chartXSentimen"></canvas></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Threads - DATA REAL -->
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Platform 3 — Data Real</div>
+      <div class="section-title">Threads · Unggahan Diabetes</div>
+      <div class="section-sub">1.362 unggahan · Feb 2024–Mei 2026</div>
+    </div>
+    <div class="grid-2 fade-up">
+      <div class="card">
+        <div class="card-title">Volume Threads per Bulan</div>
+        <div class="card-sub">Distribusi unggahan Threads tentang diabetes (semua periode)</div>
+        <div class="chart-wrap"><canvas id="chartThreadsMonthly"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Topik Paling Dibahas di Threads</div>
+        <div class="card-sub">Frekuensi topik diabetes di platform Threads</div>
+        <div class="chart-wrap"><canvas id="chartThreadsTopik"></canvas></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Google Trends - DATA REAL -->
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Platform 4 — Data Real</div>
+      <div class="section-title">Google Trends · Indeks Pencarian</div>
+      <div class="section-sub">83.780 data poin · 20 kata kunci · 2015–2026</div>
+    </div>
+    <div class="card fade-up">
+      <div class="card-title">Indeks Tren Pencarian Google — Kata Kunci Diabetes (Mar–Jun 2025)</div>
+      <div class="card-sub">Rata-rata skor tren mingguan — diabetes, insulin, gula darah tinggi, obesitas</div>
+      <div class="chart-wrap-lg"><canvas id="chartGTrends"></canvas></div>
+    </div>
+
+<!-- ══════ PAGE: TREN TEMPORAL ══════ -->
+<div id="page-tren" class="page">
+  <div class="hero" style="padding:3.5rem 2.5rem 2.5rem">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge fade-up"><div class="hero-badge-dot"></div> Analisis Waktu</div>
+      <h1 class="fade-up delay-1" style="font-size:clamp(2rem,4vw,3.2rem)">Tren Temporal<br><em>Maret — Juni 2025</em></h1>
+      <p class="hero-desc fade-up delay-2">Pola aktivitas percakapan publik tentang diabetes berdasarkan waktu — dari seluruh platform data.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">YouTube — Data Real</div>
+      <div class="section-title">Volume Komentar 2024–2026</div>
+    </div>
+    <div class="card fade-up">
+      <div class="card-title">Tren Bulanan Komentar YouTube</div>
+      <div class="card-sub">Jumlah komentar yang diposting per bulan · data real dari seluruh periode scraping</div>
+      <div class="chart-wrap-xl"><canvas id="chartTrenBulanan"></canvas></div>
+    </div>
+
+    <div class="grid-2 fade-up" style="margin-top:1.2rem">
+      <div class="card">
+        <div class="card-title">Komentar per Kuartal (2018–2026)</div>
+        <div class="card-sub">Agregasi per kuartal · data YouTube real</div>
+        <div class="chart-wrap"><canvas id="chartKuartal"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Heatmap Aktivitas per Bulan (Semua Platform)</div>
+        <div class="card-sub">Intensitas percakapan Maret–Juni 2025 · data real</div>
+        <div id="heatmapWrap" style="overflow-x:auto;margin-top:0.5rem"></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Data Real — Multi Platform</div>
+      <div class="section-title">Tren Mingguan Gabungan Mar–Jun 2025</div>
+      <div class="section-sub">Volume percakapan lintas platform per minggu · semua data real</div>
+    </div>
+    <div class="card fade-up">
+      <div class="card-title">Volume Percakapan Mingguan — YouTube + X + Threads</div>
+      <div class="card-sub">Data real dari 3 platform sosial media · Maret–Juni 2025</div>
+      <div class="chart-wrap-xl"><canvas id="chartMultiPlatform"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ PAGE: TEMUAN ══════ -->
+<div id="page-temuan" class="page">
+  <div class="hero" style="padding:3.5rem 2.5rem 2.5rem">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge fade-up"><div class="hero-badge-dot"></div> Hasil Analisis</div>
+      <h1 class="fade-up delay-1" style="font-size:clamp(2rem,4vw,3.2rem)">Temuan & Insight<br><em>Persepsi Publik Diabetes</em></h1>
+      <p class="hero-desc fade-up delay-2">Pola utama yang ditemukan dari analisis komentar YouTube dan proyeksi lintas platform tentang pemahaman masyarakat terhadap diabetes mellitus.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Temuan Kunci</div>
+      <div class="section-title">Pola Persepsi Masyarakat</div>
+    </div>
+
+    <div class="grid-3 fade-up">
+      <div class="card" style="border-top:3px solid var(--blood)">
+        <div style="font-size:1.8rem;margin-bottom:0.5rem">🩸</div>
+        <div class="card-title">Dominasi Narasi Gejala</div>
+        <div class="card-sub">Temuan dari data YouTube</div>
+        <p style="font-size:0.82rem;color:var(--text-2);line-height:1.75">Mayoritas komentar berisi pertanyaan dan curahan pengalaman seputar <strong>gejala awal diabetes</strong> — terutama sering haus, sering buang air kecil, dan luka tidak sembuh. Masyarakat aktif mencari konfirmasi gejala secara online sebelum ke dokter.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--amber)">
+        <div style="font-size:1.8rem;margin-bottom:0.5rem">🌿</div>
+        <div class="card-title">Herbal vs Medis</div>
+        <div class="card-sub">Polarisasi diskusi pengobatan</div>
+        <p style="font-size:0.82rem;color:var(--text-2);line-height:1.75">Terdapat polarisasi kuat antara pendukung pengobatan herbal/tradisional dan pengobatan medis konvensional. Komentar tentang <strong>obat herbal, kayu manis, pare, dan daun insulin</strong> sangat aktif — mencerminkan masih kuatnya kepercayaan pada pengobatan tradisional.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--teal)">
+        <div style="font-size:1.8rem;margin-bottom:0.5rem">🤝</div>
+        <div class="card-title">Komunitas Penyintas</div>
+        <div class="card-sub">Dukungan peer-to-peer digital</div>
+        <p style="font-size:0.82rem;color:var(--text-2);line-height:1.75">Kolom komentar berfungsi sebagai <strong>ruang support komunitas</strong>. Banyak penyintas berbagi perjalanan pengobatan, kadar gula darah, hingga rekomendasi dokter. Pola ini terutama terlihat di video dengan konten edukasi dari tenaga medis.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Analisis Sentimen</div>
+      <div class="section-title">Tone Percakapan Publik</div>
+      <div class="section-sub">Estimasi berdasarkan analisis manual & pola komentar YouTube</div>
+    </div>
+    <div class="grid-2 fade-up">
+      <div class="card">
+        <div class="card-title">Distribusi Sentimen Keseluruhan</div>
+        <div class="card-sub">Estimasi tone komentar lintas platform berdasarkan analisis pola data</div>
+        <div class="chart-wrap"><canvas id="chartSentimenAll"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Progres Penelitian</div>
+        <div class="card-sub">Status tiap tahapan analisis</div>
+        <div id="progressPenelitian" style="margin-top:0.8rem"></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Rekomendasi -->
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Implikasi</div>
+      <div class="section-title">Rekomendasi & Arah Penelitian</div>
+    </div>
+    <div class="grid-2 fade-up">
+      <div class="info-box">
+        <div class="info-box-title">📋 Rekomendasi Praktis</div>
+        <ul style="font-size:0.83rem;color:var(--text-2);line-height:2;margin-top:0.5rem;padding-left:1.2rem">
+          <li>Edukasi diabetes perlu merespons kekhawatiran spesifik yang muncul di media sosial</li>
+          <li>Klarifikasi klaim herbal harus jadi prioritas konten kesehatan digital</li>
+          <li>Platform video (YouTube) efektif sebagai kanal edukasi diabetes di Indonesia</li>
+          <li>Komunitas online dapat dimanfaatkan untuk program dukungan pasien</li>
+        </ul>
+      </div>
+      <div class="info-box" style="background:linear-gradient(135deg,rgba(109,40,217,0.04),rgba(13,148,136,0.04)); border-color:rgba(109,40,217,0.12)">
+        <div class="info-box-title">🔬 Arah Penelitian Lanjut</div>
+        <ul style="font-size:0.83rem;color:var(--text-2);line-height:2;margin-top:0.5rem;padding-left:1.2rem">
+          <li>Analisis sentimen otomatis (NLP) pada seluruh dataset yang terkumpul</li>
+          <li>Topic modeling (LDA) untuk kategorisasi tema lebih detail</li>
+          <li>Perbandingan persepsi lintas platform secara statistik</li>
+          <li>Korelasi volume percakapan dengan data epidemiologi diabetes nasional</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      DiabetaLens
+      <span>Analisis 8V Big Data · Persepsi Publik tentang Diabetes · Skripsi 2025</span>
+    </div>
+    <div class="footer-meta">
+      Total data: 99.564 baris · 4 platform<br>
+      YouTube: 3.640 · X: 10.782 · Threads: 1.362 · G.Trends: 83.780<br>
+      Periode scraping: 2015–2026
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── NAV ── */
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ── CHART BASE OPTIONS ── */
+const BASE = {
+  responsive: true, maintainAspectRatio: false,
+  plugins: { legend: { display: false }, tooltip: { backgroundColor: '#1C1C2E', padding: 10, cornerRadius: 8 } },
+  scales: {
+    x: { grid: { color: 'rgba(180,140,120,0.1)' }, ticks: { color: '#7A6E8A', font: { size: 11 } } },
+    y: { grid: { color: 'rgba(180,140,120,0.1)' }, ticks: { color: '#7A6E8A', font: { size: 11 } } }
+  }
+};
+const COLORS = {
+  blood: '#8B1A1A', pulse: '#E8365D', violet: '#6D28D9',
+  teal: '#0D9488', amber: '#F5A623', green: '#059669', navy: '#1C1C2E'
+};
+
+/* ── OVERVIEW: Topik Bar ── */
+new Chart(document.getElementById('chartTopik'), {
+  type: 'bar',
+  data: {
+    labels: ['Penjelasan DM', 'Gejala & Penyebab', 'Penjelasan Klinis', 'Pencegahan', 'Tipe 1 & 2'],
+    datasets: [{
+      data: [1500, 724, 696, 470, 250],
+      backgroundColor: ['#8B1A1A','#E8365D','#6D28D9','#0D9488','#F5A623'],
+      borderRadius: 8, borderSkipped: false
+    }]
+  },
+  options: { ...BASE, plugins: { ...BASE.plugins, tooltip: { ...BASE.plugins.tooltip, callbacks: { label: ctx => ` ${ctx.raw.toLocaleString()} komentar` } } }, indexAxis: 'y' }
+});
+
+/* ── OVERVIEW: Tren Line (data real semua tahun) ── */
+const trenData = {
+  '2018-01':70,'2018-02':4,'2018-03':5,'2018-07':12,'2018-08':11,'2018-10':24,
+  '2019-01':10,'2019-03':28,'2019-05':15,'2019-11':17,
+  '2020-01':12,'2020-02':12,'2020-08':13,
+  '2021-03':19,'2021-07':7,'2021-08':8,
+  '2022-08':24,'2022-09':15,'2022-10':17,'2022-11':18,'2022-12':13,
+  '2023-01':19,'2023-02':19,'2023-08':15,
+  '2024-01':1,'2024-02':4,'2024-03':33,'2024-04':29,'2024-05':33,'2024-06':26,
+  '2024-07':16,'2024-08':12,'2024-09':17,'2024-10':28,'2024-11':18,'2024-12':12,
+  '2025-01':13,'2025-02':14,'2025-03':17,'2025-04':11,'2025-05':7,'2025-06':4,
+  '2025-07':11,'2025-08':9,'2025-09':5,'2025-10':11,'2025-11':10,'2025-12':4,
+  '2026-01':9,'2026-02':12,'2026-03':10,'2026-04':2
+};
+new Chart(document.getElementById('chartTren'), {
+  type: 'line',
+  data: {
+    labels: Object.keys(trenData),
+    datasets: [{
+      data: Object.values(trenData),
+      borderColor: '#8B1A1A', backgroundColor: 'rgba(139,26,26,0.08)',
+      borderWidth: 2, fill: true, tension: 0.4, pointRadius: 2, pointHoverRadius: 5
+    }]
+  },
+  options: { ...BASE, scales: { ...BASE.scales, x: { ...BASE.scales.x, ticks: { ...BASE.scales.x.ticks, maxRotation: 45, maxTicksLimit: 12 } } } }
+});
+
+/* ── 8V: V1 Volume Bar ── */
+new Chart(document.getElementById('chartV1'), {
+  type: 'bar',
+  data: {
+    labels: ['YouTube', 'X/Twitter', 'Threads', 'Google Trends'],
+    datasets: [{ data: [3640, 10782, 1362, 83780], backgroundColor: ['#8B1A1A','#6D28D9','#0D9488','#F5A623'], borderRadius: 6, borderSkipped: false }]
+  },
+  options: { ...BASE, plugins: { ...BASE.plugins, tooltip: { ...BASE.plugins.tooltip, callbacks: { label: ctx => ` ${ctx.raw.toLocaleString()} data` } } } }
+});
+
+/* ── 8V: V2 Velocity ── */
+new Chart(document.getElementById('chartV2'), {
+  type: 'line',
+  data: {
+    labels: ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'],
+    datasets: [
+      { label:'YouTube', data:[13,14,17,11,7,4,11,9,5,11,10,4], borderColor:'#8B1A1A', borderWidth:2.5, tension:0.4, pointRadius:4, fill:false },
+      { label:'X/Twitter', data:[93,80,77,55,65,74,46,53,52,66,40,41], borderColor:'#6D28D9', borderWidth:2, tension:0.4, pointRadius:3, fill:false },
+      { label:'Threads', data:[0,1,0,23,0,0,15,99,0,44,53,2], borderColor:'#0D9488', borderWidth:2, tension:0.4, pointRadius:3, fill:false },
+    ]
+  },
+  options: { ...BASE, plugins: { ...BASE.plugins, legend: { display: true, position:'bottom', labels:{ font:{size:10}, color:'#3D3552', padding:10, boxWidth:14 } } } }
+});
+
+/* ── 8V: V3 Variety Donut ── */
+new Chart(document.getElementById('chartV3'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Teks Panjang (YT)', 'Teks Pendek (X)', 'Teks Menengah (Threads)', 'Numerik (Trends)'],
+    datasets: [{ data: [33, 44, 22, 1], backgroundColor: ['#8B1A1A','#6D28D9','#0D9488','#F5A623'], borderWidth: 3, borderColor: '#fff', hoverOffset: 6 }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position:'bottom', labels:{ font:{size:9}, color:'#3D3552', padding:8, boxWidth:12 } } } }
+});
+
+/* ── 8V: V4 Veracity Donut ── */
+new Chart(document.getElementById('chartV4'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Data Relevan (87%)', 'Spam (8%)', 'Off-topic (5%)'],
+    datasets: [{ data: [87, 8, 5], backgroundColor: ['#059669','#E8365D','#F5A623'], borderWidth: 3, borderColor: '#fff', hoverOffset: 6 }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position:'bottom', labels:{ font:{size:9}, color:'#3D3552', padding:8, boxWidth:12 } } } }
+});
+
+/* ── 8V: V5 Value Pie ── */
+new Chart(document.getElementById('chartV5'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Gejala & Kekhawatiran', 'Pengobatan & Diet', 'Dukungan Sosial', 'Lainnya'],
+    datasets: [{ data: [42, 31, 19, 8], backgroundColor: ['#8B1A1A','#0D9488','#6D28D9','#F5A623'], borderWidth: 3, borderColor: '#fff', hoverOffset: 6 }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position:'bottom', labels:{ font:{size:9}, color:'#3D3552', padding:8, boxWidth:12 } } } }
+});
+
+/* ── 8V: V6 Variability Histogram ── */
+new Chart(document.getElementById('chartV6'), {
+  type: 'bar',
+  data: {
+    labels: ['1-50','51-100','101-150','151-200','201-300','301-500','500+'],
+    datasets: [{ data: [1602, 938, 438, 244, 234, 128, 54], backgroundColor: '#E8365D', borderRadius: 5, borderSkipped: false }]
+  },
+  options: { ...BASE, plugins: { ...BASE.plugins, tooltip: { ...BASE.plugins.tooltip, callbacks: { label: ctx => ` ${ctx.raw} komentar` } } } }
+});
+
+/* ── 8V: V7 Viz Bar ── */
+new Chart(document.getElementById('chartV7'), {
+  type: 'bar',
+  data: {
+    labels: ['Bar','Line','Donut','Radar','Heatmap','Scatter','Progress','Multi-line'],
+    datasets: [{ data: [3,4,5,1,1,1,2,1], backgroundColor: '#6D28D9', borderRadius: 5, borderSkipped: false }]
+  },
+  options: { ...BASE }
+});
+
+/* ── 8V: V8 Vulnerability ── */
+new Chart(document.getElementById('chartV8'), {
+  type: 'bar',
+  data: {
+    labels: ['Privasi', 'Misinformasi', 'Bias Platform'],
+    datasets: [{ data: [7, 8, 5], backgroundColor: ['#1C1C2E','#8B1A1A','#6D28D9'], borderRadius: 5, borderSkipped: false }]
+  },
+  options: { ...BASE, scales: { ...BASE.scales, y: { ...BASE.scales.y, max: 10, ticks: { ...BASE.scales.y.ticks, callback: v => v+'/10' } } } }
+});
+
+/* ── 8V: Radar ── */
+new Chart(document.getElementById('chartRadar8V'), {
+  type: 'radar',
+  data: {
+    labels: ['Volume','Velocity','Variety','Veracity','Value','Variability','Visualization','Vulnerability'],
+    datasets: [
+      { label:'Saat ini', data:[9,7,8,7,6,8,8,6], backgroundColor:'rgba(139,26,26,0.12)', borderColor:'#8B1A1A', borderWidth:2.5, pointBackgroundColor:'#8B1A1A', pointRadius:4 },
+      { label:'Target akhir', data:[10,9,9,8,9,9,9,7], backgroundColor:'rgba(232,54,93,0.07)', borderColor:'#E8365D', borderDash:[5,3], borderWidth:1.5, pointBackgroundColor:'#E8365D', pointRadius:3 },
+    ]
+  },
+  options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:true, position:'bottom', labels:{ font:{size:11}, color:'#3D3552', padding:14, boxWidth:14 } } }, scales:{ r:{ beginAtZero:true, max:10, grid:{ color:'rgba(180,140,120,0.2)' }, pointLabels:{ font:{size:10}, color:'#3D3552' }, ticks:{ display:false } } } }
+});
+
+/* ── 8V: Progress ── */
+const v8data = [
+  { label:'V1 Volume', val:95, color:'#8B1A1A' },
+  { label:'V2 Velocity', val:80, color:'#6D28D9' },
+  { label:'V3 Variety', val:85, color:'#0D9488' },
+  { label:'V4 Veracity', val:75, color:'#F5A623' },
+  { label:'V5 Value', val:65, color:'#059669' },
+  { label:'V6 Variability', val:90, color:'#E8365D' },
+  { label:'V7 Visualization', val:85, color:'#1C1C2E' },
+  { label:'V8 Vulnerability', val:70, color:'#6D28D9' },
+];
+document.getElementById('progress8v').innerHTML = v8data.map(d => `
+  <div class="progress-row">
+    <div class="progress-header">
+      <span class="progress-label">${d.label}</span>
+      <span class="progress-val" style="color:${d.color}">${d.val}%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:${d.val}%;background:${d.color}"></div></div>
+  </div>`).join('');
+
+/* ── PLATFORM: YT Donut ── */
+new Chart(document.getElementById('chartYTTopikDonut'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Penjelasan DM (41%)', 'Penjelasan Klinis (19%)', 'Gejala & Penyebab (20%)', 'Pencegahan (13%)', 'Tipe 1&2 (7%)'],
+    datasets: [{ data: [1500,696,724,470,250], backgroundColor: ['#8B1A1A','#6D28D9','#E8365D','#0D9488','#F5A623'], borderWidth:3, borderColor:'#fff', hoverOffset:8 }]
+  },
+  options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:true, position:'right', labels:{ font:{size:10}, color:'#3D3552', padding:10, boxWidth:14 } } } }
+});
+
+/* ── PLATFORM: Panjang Komentar Histogram ── */
+new Chart(document.getElementById('chartKomentarLen'), {
+  type: 'bar',
+  data: {
+    labels: ['1-50','51-100','101-150','151-200','201-300','301-500','500+'],
+    datasets: [{ data: [1602, 938, 438, 244, 234, 128, 54], backgroundColor: 'rgba(139,26,26,0.75)', borderRadius: 6, borderSkipped: false }]
+  },
+  options: { ...BASE, plugins: { ...BASE.plugins, tooltip: { ...BASE.plugins.tooltip, callbacks: { label: ctx => ` ${ctx.raw} komentar` } } } }
+});
+
+/* ── PLATFORM: X Monthly ── */
+new Chart(document.getElementById('chartXMonthly'), {
+  type: 'bar',
+  data: {
+    labels: ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'],
+    datasets: [{ label:'Tweet X 2025', data:[93,80,77,55,65,74,46,53,52,66,40,41], backgroundColor: 'rgba(109,40,217,0.75)', borderRadius: 6, borderSkipped: false }]
+  },
+  options: { ...BASE, plugins: { ...BASE.plugins, tooltip: { ...BASE.plugins.tooltip, callbacks: { label: ctx => ` ${ctx.raw} tweet` } } } }
+});
+
+/* ── PLATFORM: X Sentimen ── */
+new Chart(document.getElementById('chartXSentimen'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Positif', 'Netral', 'Negatif'],
+    datasets: [{ data: [38, 42, 20], backgroundColor: ['#059669','#F5A623','#8B1A1A'], borderWidth:3, borderColor:'#fff', hoverOffset:6 }]
+  },
+  options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:true, position:'bottom', labels:{ font:{size:11}, color:'#3D3552', padding:12, boxWidth:14 } } } }
+});
+
+/* ── PLATFORM: Threads Monthly ── */
+new Chart(document.getElementById('chartThreadsMonthly'), {
+  type: 'bar',
+  data: {
+    labels: ['Feb-24','Okt-24','Feb-25','Apr-25','Jul-25','Ags-25','Okt-25','Nov-25','Des-25','Jan-26','Feb-26','Mar-26','Apr-26','Mei-26'],
+    datasets: [{ data: [7,40,1,23,15,99,44,53,2,72,558,183,73,138], backgroundColor: 'rgba(13,148,136,0.75)', borderRadius: 6, borderSkipped: false }]
+  },
+  options: { ...BASE, plugins: { ...BASE.plugins, tooltip: { ...BASE.plugins.tooltip, callbacks: { label: ctx => ` ${ctx.raw} unggahan` } } }, scales: { ...BASE.scales, x: { ...BASE.scales.x, ticks: { ...BASE.scales.x.ticks, maxRotation: 45 } } } }
+});
+
+/* ── PLATFORM: Threads Topik ── */
+new Chart(document.getElementById('chartThreadsTopik'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Diabetes (41%)', 'Unknown (5%)', 'Lainnya (54%)'],
+    datasets: [{ data: [563, 68, 731], backgroundColor: ['#0D9488','#F5A623','#5EEAD4'], borderWidth:3, borderColor:'#fff', hoverOffset:6 }]
+  },
+  options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:true, position:'bottom', labels:{ font:{size:11}, color:'#3D3552', padding:12, boxWidth:14 } } } }
+});
+
+/* ── PLATFORM: Google Trends ── */
+new Chart(document.getElementById('chartGTrends'), {
+  type: 'line',
+  data: {
+    labels: ['2 Mar','9 Mar','16 Mar','23 Mar','30 Mar','6 Apr','13 Apr','20 Apr','27 Apr','4 Mei','11 Mei','18 Mei','25 Mei','1 Jun','8 Jun','15 Jun','22 Jun','29 Jun'],
+    datasets: [
+      { label:'diabetes', data:[90.5,89.0,87.1,80.3,64.9,66.9,86.3,88.7,94.6,91.0,89.9,90.1,88.7,81.7,76.9,81.9,83.0,87.1], borderColor:'#8B1A1A', borderWidth:2.5, tension:0.4, pointRadius:3, fill:false },
+      { label:'insulin', data:[45.0,63.3,79.0,64.3,44.1,43.3,68.3,73.9,80.3,72.3,76.3,66.9,76.0,67.0,64.7,68.4,70.4,61.6], borderColor:'#E8365D', borderWidth:2, tension:0.4, pointRadius:2, fill:false },
+      { label:'gula darah tinggi', data:[57.5,61.1,52.0,49.9,46.3,45.1,58.7,67.7,67.6,59.3,60.9,67.7,64.6,63.3,63.0,62.3,69.6,68.6], borderColor:'#F5A623', borderWidth:2, tension:0.4, pointRadius:2, fill:false },
+      { label:'obesitas', data:[51.0,64.7,70.3,62.7,46.4,36.9,58.6,68.0,66.6,62.0,68.9,66.6,77.3,65.4,59.9,66.7,67.4,64.3], borderColor:'#6D28D9', borderWidth:2, tension:0.4, pointRadius:2, fill:false },
+    ]
+  },
+  options: { ...BASE, plugins: { ...BASE.plugins, legend: { display:true, position:'bottom', labels:{ font:{size:10}, color:'#3D3552', padding:12, boxWidth:14 } } } }
+});
+
+/* ── TREN: Bulanan (data real full) ── */
+const bulanLabel = ['Jan-18','Jul-18','Jan-19','Jul-19','Jan-20','Jul-20','Jan-21','Jul-21','Jan-22','Jul-22','Jan-23','Jul-23','Jan-24','Apr-24','Jul-24','Okt-24','Jan-25','Apr-25','Jul-25','Okt-25','Jan-26','Apr-26'];
+const bulanData  = [70,12,10,9,12,6,8,7,5,8,19,4,1,29,16,28,13,11,11,11,9,2];
+new Chart(document.getElementById('chartTrenBulanan'), {
+  type: 'bar',
+  data: {
+    labels: bulanLabel,
+    datasets: [{
+      label: 'Komentar', data: bulanData,
+      backgroundColor: bulanLabel.map((l,i) => i>=20 ? 'rgba(232,54,93,0.75)' : i>=16 ? 'rgba(139,26,26,0.7)' : 'rgba(139,26,26,0.4)'),
+      borderRadius: 5, borderSkipped: false
+    }]
+  },
+  options: { ...BASE, scales: { ...BASE.scales, x: { ...BASE.scales.x, ticks: { ...BASE.scales.x.ticks, maxRotation:45 } } }, plugins: { ...BASE.plugins, tooltip: { ...BASE.plugins.tooltip, callbacks: { label: ctx => ` ${ctx.raw} komentar` } } } }
+});
+
+/* ── TREN: Kuartal ── */
+new Chart(document.getElementById('chartKuartal'), {
+  type: 'bar',
+  data: {
+    labels: ['Q1-18','Q2-18','Q3-18','Q4-18','Q1-19','Q3-19','Q1-20','Q3-20','Q1-21','Q3-21','Q1-22','Q3-22','Q1-23','Q3-23','Q1-24','Q2-24','Q3-24','Q4-24','Q1-25','Q2-25','Q3-25','Q4-25','Q1-26'],
+    datasets: [{ data:[79,18,32,41,49,36,28,26,31,17,10,47,47,26,38,88,45,58,44,22,25,25,31],
+      backgroundColor: (ctx) => {
+        const i = ctx.dataIndex;
+        return i >= 20 ? 'rgba(232,54,93,0.8)' : i >= 17 ? 'rgba(139,26,26,0.8)' : 'rgba(139,26,26,0.45)';
+      },
+      borderRadius:7, borderSkipped:false }]
+  },
+  options: { ...BASE, scales: { ...BASE.scales, x: { ...BASE.scales.x, ticks: { ...BASE.scales.x.ticks, maxRotation:45 } } } }
+});
+
+/* ── TREN: Heatmap ── */
+(function() {
+  const months = ['Mar-25','Apr-25','Mei-25','Jun-25'];
+  const platforms = ['YouTube','X/Twitter','Threads','G.Trends'];
+  const vals = [[17,11,7,4],[77,55,65,74],[0,23,0,0],[625,604,624,605]];
+  const maxV = Math.max(...vals.flat());
+  let html = `<table style="border-collapse:collapse;width:100%;font-size:0.75rem">
+    <thead><tr><th style="padding:6px 8px;color:var(--text-3);text-align:left">Platform</th>`;
+  months.forEach(m => html += `<th style="padding:6px 8px;color:var(--text-2);font-weight:600;text-align:center">${m}</th>`);
+  html += '</tr></thead><tbody>';
+  vals.forEach((row,i) => {
+    html += `<tr><td style="padding:6px 8px;font-weight:600;color:var(--text-2);white-space:nowrap">${platforms[i]}</td>`;
+    row.forEach(v => {
+      const t = v/maxV;
+      const bg = `rgba(139,26,26,${0.08 + t*0.6})`;
+      const color = t > 0.55 ? 'white' : 'var(--text-1)';
+      html += `<td style="padding:6px 8px;text-align:center;background:${bg};color:${color};font-weight:600;border-radius:4px">${v.toLocaleString()}</td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('heatmapWrap').innerHTML = html;
+})();
+
+/* ── TREN: Multi Platform ── */
+const weeks = ['2 Mar','9 Mar','16 Mar','23 Mar','30 Mar','6 Apr','13 Apr','20 Apr','27 Apr','4 Mei','11 Mei','18 Mei','25 Mei','1 Jun','8 Jun','15 Jun','22 Jun'];
+new Chart(document.getElementById('chartMultiPlatform'), {
+  type: 'line',
+  data: {
+    labels: weeks,
+    datasets: [
+      { label:'YouTube', data:[3,2,4,4,4,4,3,1,1,3,1,2,2,1,3,0,1], borderColor:'#8B1A1A', borderWidth:2.5, tension:0.4, pointRadius:3, fill:false },
+      { label:'X/Twitter', data:[5,21,15,17,19,11,14,16,7,22,15,14,11,12,18,16,18], borderColor:'#6D28D9', borderWidth:2, tension:0.4, pointRadius:3, fill:false },
+      { label:'Threads', data:[0,0,0,0,0,1,22,0,0,0,0,0,0,0,0,0,0], borderColor:'#0D9488', borderWidth:2, tension:0.4, pointRadius:3, fill:false },
+    ]
+  },
+  options: { ...BASE, plugins: { ...BASE.plugins, legend:{ display:true, position:'bottom', labels:{ font:{size:11}, color:'#3D3552', padding:14, boxWidth:14 } } } }
+});
+
+/* ── TEMUAN: Sentimen All ── */
+new Chart(document.getElementById('chartSentimenAll'), {
+  type: 'bar',
+  data: {
+    labels: ['YouTube','X/Twitter','Threads','Gabungan'],
+    datasets: [
+      { label:'Positif',  data:[35,38,40,37], backgroundColor:'#059669cc', borderRadius:[5,0,0,5], borderSkipped:false },
+      { label:'Netral',   data:[45,42,38,42], backgroundColor:'#F5A623cc', borderRadius:0, borderSkipped:false },
+      { label:'Negatif',  data:[20,20,22,21], backgroundColor:'#8B1A1Acc', borderRadius:[0,5,5,0], borderSkipped:false },
+    ]
+  },
+  options: { ...BASE, plugins:{ ...BASE.plugins, legend:{ display:true, position:'bottom', labels:{ font:{size:11}, color:'#3D3552', padding:12, boxWidth:14 } } }, scales:{ x:{ stacked:true, grid:{color:'rgba(180,140,120,0.1)'}, ticks:{color:'#7A6E8A'} }, y:{ stacked:true, max:100, grid:{color:'rgba(180,140,120,0.1)'}, ticks:{color:'#7A6E8A', callback:v=>v+'%'} } } }
+});
+
+/* ── TEMUAN: Progress Penelitian ── */
+const progData = [
+  { label:'Scraping YouTube', val:100, color:'#059669' },
+  { label:'Cleaning & Merge Data YT', val:100, color:'#059669' },
+  { label:'Scraping X/Twitter', val:100, color:'#059669' },
+  { label:'Scraping Threads', val:100, color:'#059669' },
+  { label:'Google Trends Collection', val:100, color:'#059669' },
+  { label:'Integrasi & Merge Master Dataset', val:100, color:'#059669' },
+  { label:'Analisis Sentimen (NLP)', val:20, color:'#E8365D' },
+  { label:'Topic Modeling & Finalisasi', val:10, color:'#8B1A1A' },
+];
+document.getElementById('progressPenelitian').innerHTML = progData.map(d => `
+  <div class="progress-row">
+    <div class="progress-header">
+      <span class="progress-label">${d.label}</span>
+      <span class="progress-val" style="color:${d.color}">${d.val}%</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" style="width:${d.val}%;background:${d.color}"></div></div>
+  </div>`).join('');
+</script>
+</body>
+</html>
