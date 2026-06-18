@@ -65,10 +65,10 @@ nav { position:fixed; top:0; left:0; right:0; z-index:1000; height:var(--nav-h);
 .nav-link.active { background:rgba(139,26,26,0.1); color:var(--blood); font-weight:600; }
 .nav-badge { margin-left:auto; background:linear-gradient(135deg, var(--blood), var(--pulse)); color:white; font-size:0.65rem; padding:4px 11px; border-radius:20px; font-weight:700; letter-spacing:0.06em; flex-shrink:0; box-shadow:0 4px 12px rgba(139,26,26,0.3); }
 
-/* ── LAYOUT ── */
+/* ── LAYOUT (PEMBARUAN BUG OVERLAP) ── */
 main { padding-top:var(--nav-h); }
-.page { display:none; }
-.page.active { display:block; animation: fadePage 0.4s ease-out forwards; }
+.page { display:none !important; }
+.page.active { display:block !important; animation: fadePage 0.4s ease-out forwards; }
 @keyframes fadePage { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)} }
 
 .section { max-width:1280px; margin:0 auto; padding:3.5rem 2.5rem; }
@@ -151,6 +151,14 @@ main { padding-top:var(--nav-h); }
 .topic-tag { display:inline-flex; align-items:center; gap:6px; padding:5px 12px; background:var(--surface-2); border:1px solid var(--border); border-radius:20px; font-size:0.75rem; color:var(--text-2); font-weight:500; margin:3px; }
 .topic-dot { width:8px; height:8px; border-radius:50%; }
 
+/* ── PROGRESS BARS ── */
+.progress-row { margin-bottom: 0.8rem; }
+.progress-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
+.progress-label { font-size: 0.78rem; font-weight: 500; color: var(--text-1); }
+.progress-val { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; }
+.progress-track { height: 6px; background: var(--surface-2); border-radius: 10px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 10px; transition: width 1s ease-in-out; }
+
 /* ── CHART WRAPS ── */
 .chart-wrap { position:relative; width:100%; height:270px; }
 .chart-wrap-sm { height:180px; }
@@ -202,7 +210,7 @@ footer { background:var(--navy); padding:2.5rem; margin-top:4rem; }
 <body>
 
 <nav>
-  <a class="nav-logo" href="#" onclick="showPage('overview');return false">
+  <a class="nav-logo" href="#" onclick="showPage('overview', document.querySelector('.nav-link')); return false;">
     <div class="nav-logo-mark">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M3 12h3l2-7 4 14 3-9 2 5 2-3h2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -215,18 +223,17 @@ footer { background:var(--navy); padding:2.5rem; margin-top:4rem; }
   </a>
   <div class="nav-divider"></div>
   <div class="nav-links">
-    <button class="nav-link active" onclick="showPage('overview')">Overview</button>
-    <button class="nav-link" onclick="showPage('8v')">8V Analysis</button>
-    <button class="nav-link" onclick="showPage('platform')">Platform Data</button>
-    <button class="nav-link" onclick="showPage('tren')">Tren Temporal</button>
-    <button class="nav-link" onclick="showPage('temuan')">Temuan</button>
+    <button class="nav-link active" onclick="showPage('overview', this)">Overview</button>
+    <button class="nav-link" onclick="showPage('8v', this)">8V Analysis</button>
+    <button class="nav-link" onclick="showPage('platform', this)">Platform Data</button>
+    <button class="nav-link" onclick="showPage('tren', this)">Tren Temporal</button>
+    <button class="nav-link" onclick="showPage('temuan', this)">Temuan</button>
   </div>
   <div class="nav-badge">Kelompok Mie Ayam</div>
 </nav>
 
 <main>
 
-<!-- KODE YANG SUDAH DIPERBAIKI -->
 <div id="page-overview" class="page active">
   <div class="hero">
     <div class="hero-grid"></div>
@@ -236,127 +243,17 @@ footer { background:var(--navy); padding:2.5rem; margin-top:4rem; }
     </svg>
     <div class="hero-content">
       <div class="hero-badge fade-up"><div class="hero-badge-dot"></div> Analisis Persepsi Publik · Diabetes</div>
-      <h1 class="fade-up delay-1">
+     <h1 class="fade-up delay-1">
         Analisis Big Data<br>
         Diabetes di Indonesia
       </h1>
-      <p class="hero-desc fade-up delay-2">
-        Dashboard ini menyajikan hasil analisis Big Data 
-        yang berasal dari YouTube, X (Twitter), Threads,
-        dan Google Trends untuk mengidentifikasi pola
-        percakapan, minat pencarian, serta persepsi masyarakat
-        Indonesia terhadap diabetes pada periode 2015–2026.
-      </p>
-    </div> <!-- Menutup .hero-content -->
-  </div> <!-- Menutup .hero (INI YANG SEBELUMNYA KURANG) -->
-
-  <div class="section">
-    <div class="section-head fade-up">
-      <div class="section-eyebrow">Sorotan Utama (Key Highlights)</div>
-      <div class="section-title">Temuan Cepat Persepsi Publik</div>
-      <div class="section-sub">Tiga wawasan paling krusial dari analisis 99.564 interaksi digital</div>
-    </div>
-
-    <div class="grid-3 fade-up">
-      <div class="card" style="border-left: 4px solid var(--blood)">
-        <div style="font-size:1.6rem;margin-bottom:0.8rem">🩸</div>
-        <div class="card-title">Topik Paling Dominan</div>
-        <p style="font-size:0.83rem;color:var(--text-2);line-height:1.6">
-          <strong>"Gejala & Pengobatan Mandiri"</strong> mendominasi seluruh platform. Masyarakat cenderung mencari validasi gejala di internet dan berdebat mengenai khasiat obat herbal (daun insulin) dibandingkan berkonsultasi langsung ke dokter medis.
-        </p>
-      </div>
-      <div class="card" style="border-left: 4px solid var(--violet)">
-        <div style="font-size:1.6rem;margin-bottom:0.8rem">🧑‍💻</div>
-        <div class="card-title">Kepanikan Usia Muda</div>
-        <p style="font-size:0.83rem;color:var(--text-2);line-height:1.6">
-          Diabetes tidak lagi eksklusif dibahas lansia. Terdapat lonjakan signifikan di platform X dan Threads dari pengguna Gen Z (usia 20-an) yang mengalami <em>health anxiety</em> akibat budaya kerja sedentari (duduk lama) dan kebiasaan minuman manis.
-        </p>
-      </div>
-      <div class="card" style="border-left: 4px solid var(--amber)">
-        <div style="font-size:1.6rem;margin-bottom:0.8rem">📈</div>
-        <div class="card-title">Puncak Lonjakan Interaksi</div>
-        <p style="font-size:0.83rem;color:var(--text-2);line-height:1.6">
-          Data temporal membuktikan adanya "Siklus Penyesalan". Percakapan mengenai diabetes selalu memuncak secara musiman pada bulan <strong>April/Mei (Pasca Idul Fitri)</strong> dan <strong>Januari</strong>, didorong oleh rasa bersalah setelah konsumsi gula tinggi di masa liburan.
-        </p>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="section-head fade-up">
-      <div class="section-eyebrow">Karakteristik Dataset</div>
-      <div class="section-title">Sumber Data per Platform</div>
-    </div>
-    <div class="grid-4 fade-up">
-      <div class="platform-card">
-        <div class="platform-icon" style="background:rgba(139,26,26,0.08); font-size:1.3rem;">▶️</div>
-        <div>
-          <div class="platform-name">YouTube</div>
-          <div class="platform-count">3.640</div>
-          <div class="platform-meta">komentar · 25 topik video</div>
-        </div>
-      </div>
-      <div class="platform-card">
-        <div class="platform-icon" style="background:rgba(109,40,217,0.07); font-size:1.3rem;">𝕏</div>
-        <div>
-          <div class="platform-name">X / Twitter</div>
-          <div class="platform-count">10.782</div>
-          <div class="platform-meta">tweet · 2016–2026</div>
-        </div>
-      </div>
-      <div class="platform-card">
-        <div class="platform-icon" style="background:rgba(13,148,136,0.07); font-size:1.3rem;">🧵</div>
-        <div>
-          <div class="platform-name">Threads</div>
-          <div class="platform-count">1.362</div>
-          <div class="platform-meta">unggahan · Feb 2024–Mei 2026</div>
-        </div>
-      </div>
-      <div class="platform-card">
-        <div class="platform-icon" style="background:rgba(245,166,35,0.08); font-size:1.3rem;">📈</div>
-        <div>
-          <div class="platform-name">Google Trends</div>
-          <div class="platform-count">83.780</div>
-          <div class="platform-meta">data poin · 20 kata kunci</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="section-head fade-up">
-      <div class="section-eyebrow">Komposisi & Tahapan Data</div>
-      <div class="section-title">Master Dataset & Pipeline Eksekusi</div>
-    </div>
-    
-    <div class="grid-2 fade-up">
-      <div class="card">
-        <div class="card-title">Proporsi Sumber Data</div>
-        <div class="card-sub">Distribusi 99.564 baris data agregat dari 4 platform</div>
-        <div class="chart-wrap"><canvas id="chartOverviewProporsi"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="card-title">Data Pipeline / Funnel Eksekusi</div>
-        <div class="card-sub">Penyusutan volume data dari tahap mentah hingga dataset bersih</div>
-        <div class="chart-wrap"><canvas id="chartDataFunnel"></canvas></div>
-      </div>
-    </div>
-    <div class="info-box fade-up" style="margin-top:2rem">
-      <div class="info-box-title">🎯 Tujuan Penelitian</div>
-      <p style="font-size:0.84rem;color:var(--text-2);line-height:1.75;margin-top:0.3rem">
-        Menganalisis persepsi masyarakat Indonesia terhadap diabetes mellitus menggunakan pendekatan <strong>8V Big Data</strong> (Volume, Velocity, Variety, Veracity, Value, Variability, Visualization, Vulnerability) dari data media sosial dan pencarian online periode Maret–Juni 2025. Penelitian ini mengidentifikasi pola pemahaman, kekhawatiran, dan informasi yang beredar di ruang digital.
-      </p>
-    </div>
-  </div> <!-- Menutup .section -->
-</div> <!-- Menutup #page-overview dengan benar -->
-
-<div id="page-8v" class="page">
-  <div class="hero" style="padding:3.5rem 2.5rem 2.5rem">
-    <div class="hero-grid"></div>
-    <div class="hero-content">
-      <div class="hero-badge fade-up"><div class="hero-badge-dot"></div> Framework Analisis</div>
-      <h1 class="fade-up delay-1" style="font-size:clamp(2rem,4vw,3.2rem)">8V Big Data<br><em>Diabetes di Media Sosial</em></h1>
-      <p class="hero-desc fade-up delay-2">Delapan dimensi analisis big data — diterapkan pada percakapan publik seputar diabetes di YouTube, X, Threads, dan Google Trends.</p>
+    <p class="hero-desc fade-up delay-2">
+      Dashboard ini menyajikan hasil analisis Big Data 
+      yang berasal dari YouTube, X (Twitter), Threads,
+      dan Google Trends untuk mengidentifikasi pola
+      percakapan, minat pencarian, serta persepsi masyarakat
+      Indonesia terhadap diabetes pada periode 2015–2026.
+    </p>
     </div>
   </div>
 
@@ -405,6 +302,7 @@ footer { background:var(--navy); padding:2.5rem; margin-top:4rem; }
           <div class="platform-name">YouTube</div>
           <div class="platform-count">3.640</div>
           <div class="platform-meta">komentar · 25 topik video</div>
+          <div style="margin-top:6px"><span class="badge badge-green"><span class="badge-dot"></span> Selesai</span></div>
         </div>
       </div>
       <div class="platform-card">
@@ -413,6 +311,7 @@ footer { background:var(--navy); padding:2.5rem; margin-top:4rem; }
           <div class="platform-name">X / Twitter</div>
           <div class="platform-count">10.782</div>
           <div class="platform-meta">tweet · 2016–2026</div>
+          <div style="margin-top:6px"><span class="badge badge-green"><span class="badge-dot"></span> Selesai</span></div>
         </div>
       </div>
       <div class="platform-card">
@@ -421,6 +320,7 @@ footer { background:var(--navy); padding:2.5rem; margin-top:4rem; }
           <div class="platform-name">Threads</div>
           <div class="platform-count">1.362</div>
           <div class="platform-meta">unggahan · Feb 2024–Mei 2026</div>
+          <div style="margin-top:6px"><span class="badge badge-green"><span class="badge-dot"></span> Selesai</span></div>
         </div>
       </div>
       <div class="platform-card">
@@ -429,6 +329,7 @@ footer { background:var(--navy); padding:2.5rem; margin-top:4rem; }
           <div class="platform-name">Google Trends</div>
           <div class="platform-count">83.780</div>
           <div class="platform-meta">data poin · 20 kata kunci</div>
+          <div style="margin-top:6px"><span class="badge badge-green"><span class="badge-dot"></span> Selesai</span></div>
         </div>
       </div>
     </div>
@@ -451,6 +352,19 @@ footer { background:var(--navy); padding:2.5rem; margin-top:4rem; }
         <div class="card-sub">Penyusutan volume data dari tahap mentah hingga dataset bersih</div>
         <div class="chart-wrap"><canvas id="chartDataFunnel"></canvas></div>
       </div>
+    </div>
+
+    <div class="info-box fade-up" style="margin-top:2rem">
+      <div class="info-box-title">🎯 Tujuan Penelitian</div>
+     <p style="font-size:0.84rem;color:var(--text-2);line-height:1.75;margin-top:0.3rem">
+       Penelitian ini bertujuan menganalisis pola percakapan,
+       ketertarikan pencarian, dan persepsi masyarakat terhadap
+       diabetes melalui pendekatan Big Data 8V dengan
+       mengintegrasikan data dari YouTube, X (Twitter),
+       Threads, dan Google Trends periode 2015–2026.
+       Hasil analisis digunakan untuk memahami bagaimana
+       isu diabetes berkembang dalam ruang digital Indonesia.
+     </p>
     </div>
   </div>
 </div>
@@ -614,7 +528,7 @@ footer { background:var(--navy); padding:2.5rem; margin-top:4rem; }
       </div>
       <div class="card" style="display:flex;flex-direction:column;gap:0.5rem">
         <div class="card-title">Ringkasan Skor per Dimensi</div>
-        <div class="card-sub">Progres pengumpulan dan analisis data</div>
+        <div class="card-sub">Progres pengumpulan dan analisis data 8V</div>
         
         <div id="progress8v" style="margin-top:0.5rem">
           <div class="progress-row">
@@ -1024,12 +938,26 @@ footer { background:var(--navy); padding:2.5rem; margin-top:4rem; }
 </footer>
 
 <script>
-/* ── NAV ── */
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+/* ── NAV (LOGIKA DIKUATKAN) ── */
+function showPage(id, el) {
+  // 1. Sembunyikan semua halaman dengan kuat
+  document.querySelectorAll('.page').forEach(p => {
+    p.classList.remove('active');
+    p.style.display = 'none'; 
+  });
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  event.target.classList.add('active');
+  
+  // 2. Munculkan hanya halaman yang dituju
+  const targetPage = document.getElementById('page-' + id);
+  if (targetPage) {
+    targetPage.classList.add('active');
+    targetPage.style.display = 'block';
+  }
+  
+  // 3. Beri highlight pada tombol menu
+  if (el && el.classList) {
+    el.classList.add('active');
+  }
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
