@@ -226,6 +226,7 @@ footer { background:var(--navy); padding:2.5rem; margin-top:4rem; }
 
 <main>
 
+<!-- KODE YANG SUDAH DIPERBAIKI -->
 <div id="page-overview" class="page active">
   <div class="hero">
     <div class="hero-grid"></div>
@@ -235,20 +236,120 @@ footer { background:var(--navy); padding:2.5rem; margin-top:4rem; }
     </svg>
     <div class="hero-content">
       <div class="hero-badge fade-up"><div class="hero-badge-dot"></div> Analisis Persepsi Publik · Diabetes</div>
-     <h1 class="fade-up delay-1">
+      <h1 class="fade-up delay-1">
         Analisis Big Data<br>
         Diabetes di Indonesia
       </h1>
-    <p class="hero-desc fade-up delay-2">
-      Dashboard ini menyajikan hasil analisis Big Data 
-      yang berasal dari YouTube, X (Twitter), Threads,
-      dan Google Trends untuk mengidentifikasi pola
-      percakapan, minat pencarian, serta persepsi masyarakat
-      Indonesia terhadap diabetes pada periode 2015–2026.
-    </p>
+      <p class="hero-desc fade-up delay-2">
+        Dashboard ini menyajikan hasil analisis Big Data 
+        yang berasal dari YouTube, X (Twitter), Threads,
+        dan Google Trends untuk mengidentifikasi pola
+        percakapan, minat pencarian, serta persepsi masyarakat
+        Indonesia terhadap diabetes pada periode 2015–2026.
+      </p>
+    </div> <!-- Menutup .hero-content -->
+  </div> <!-- Menutup .hero (INI YANG SEBELUMNYA KURANG) -->
+
+  <div class="section">
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Sorotan Utama (Key Highlights)</div>
+      <div class="section-title">Temuan Cepat Persepsi Publik</div>
+      <div class="section-sub">Tiga wawasan paling krusial dari analisis 99.564 interaksi digital</div>
+    </div>
+
+    <div class="grid-3 fade-up">
+      <div class="card" style="border-left: 4px solid var(--blood)">
+        <div style="font-size:1.6rem;margin-bottom:0.8rem">🩸</div>
+        <div class="card-title">Topik Paling Dominan</div>
+        <p style="font-size:0.83rem;color:var(--text-2);line-height:1.6">
+          <strong>"Gejala & Pengobatan Mandiri"</strong> mendominasi seluruh platform. Masyarakat cenderung mencari validasi gejala di internet dan berdebat mengenai khasiat obat herbal (daun insulin) dibandingkan berkonsultasi langsung ke dokter medis.
+        </p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--violet)">
+        <div style="font-size:1.6rem;margin-bottom:0.8rem">🧑‍💻</div>
+        <div class="card-title">Kepanikan Usia Muda</div>
+        <p style="font-size:0.83rem;color:var(--text-2);line-height:1.6">
+          Diabetes tidak lagi eksklusif dibahas lansia. Terdapat lonjakan signifikan di platform X dan Threads dari pengguna Gen Z (usia 20-an) yang mengalami <em>health anxiety</em> akibat budaya kerja sedentari (duduk lama) dan kebiasaan minuman manis.
+        </p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--amber)">
+        <div style="font-size:1.6rem;margin-bottom:0.8rem">📈</div>
+        <div class="card-title">Puncak Lonjakan Interaksi</div>
+        <p style="font-size:0.83rem;color:var(--text-2);line-height:1.6">
+          Data temporal membuktikan adanya "Siklus Penyesalan". Percakapan mengenai diabetes selalu memuncak secara musiman pada bulan <strong>April/Mei (Pasca Idul Fitri)</strong> dan <strong>Januari</strong>, didorong oleh rasa bersalah setelah konsumsi gula tinggi di masa liburan.
+        </p>
       </div>
     </div>
-  </div>
+
+    <div class="divider"></div>
+
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Karakteristik Dataset</div>
+      <div class="section-title">Sumber Data per Platform</div>
+    </div>
+    <div class="grid-4 fade-up">
+      <div class="platform-card">
+        <div class="platform-icon" style="background:rgba(139,26,26,0.08); font-size:1.3rem;">▶️</div>
+        <div>
+          <div class="platform-name">YouTube</div>
+          <div class="platform-count">3.640</div>
+          <div class="platform-meta">komentar · 25 topik video</div>
+        </div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon" style="background:rgba(109,40,217,0.07); font-size:1.3rem;">𝕏</div>
+        <div>
+          <div class="platform-name">X / Twitter</div>
+          <div class="platform-count">10.782</div>
+          <div class="platform-meta">tweet · 2016–2026</div>
+        </div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon" style="background:rgba(13,148,136,0.07); font-size:1.3rem;">🧵</div>
+        <div>
+          <div class="platform-name">Threads</div>
+          <div class="platform-count">1.362</div>
+          <div class="platform-meta">unggahan · Feb 2024–Mei 2026</div>
+        </div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-icon" style="background:rgba(245,166,35,0.08); font-size:1.3rem;">📈</div>
+        <div>
+          <div class="platform-name">Google Trends</div>
+          <div class="platform-count">83.780</div>
+          <div class="platform-meta">data poin · 20 kata kunci</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-head fade-up">
+      <div class="section-eyebrow">Komposisi & Tahapan Data</div>
+      <div class="section-title">Master Dataset & Pipeline Eksekusi</div>
+    </div>
+    
+    <div class="grid-2 fade-up">
+      <div class="card">
+        <div class="card-title">Proporsi Sumber Data</div>
+        <div class="card-sub">Distribusi 99.564 baris data agregat dari 4 platform</div>
+        <div class="chart-wrap"><canvas id="chartOverviewProporsi"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Data Pipeline / Funnel Eksekusi</div>
+        <div class="card-sub">Penyusutan volume data dari tahap mentah hingga dataset bersih</div>
+        <div class="chart-wrap"><canvas id="chartDataFunnel"></canvas></div>
+      </div>
+    </div>
+
+    <div class="info-box fade-up" style="margin-top:2rem">
+      <div class="info-box-title">🎯 Tujuan Penelitian</div>
+      <p style="font-size:0.84rem;color:var(--text-2);line-height:1.75;margin-top:0.3rem">
+        Menganalisis persepsi masyarakat Indonesia terhadap diabetes mellitus menggunakan pendekatan <strong>8V Big Data</strong> (Volume, Velocity, Variety, Veracity, Value, Variability, Visualization, Vulnerability) dari data media sosial dan pencarian online periode Maret–Juni 2025. Penelitian ini mengidentifikasi pola pemahaman, kekhawatiran, dan informasi yang beredar di ruang digital.
+      </p>
+    </div>
+  </div> <!-- Menutup .section -->
+</div> <!-- Menutup #page-overview dengan benar -->
 
   <div class="section">
     
