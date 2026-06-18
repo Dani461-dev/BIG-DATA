@@ -1,0 +1,50 @@
+{
+  "phase": "F5_Longitudinal_Modeling",
+  "timestamp": "2026-06-14T23:58:54.388410",
+  "stl_decomposition": {
+    "status": "failed",
+    "error": "Unable to determine period from endog"
+  },
+  "arima_parameters": {
+    "status": "success",
+    "order": [
+      0,
+      1,
+      1
+    ],
+    "seasonal_order": [
+      0,
+      0,
+      0,
+      12
+    ],
+    "aic": -548.8415355387732,
+    "bic": -543.3516712820467
+  },
+  "arima_fit": {
+    "status": "failed",
+    "error": "'ARIMAResults' object has no attribute 'diagnostics'"
+  },
+  "prophet_fit": {
+    "status": "success",
+    "forecast": "            ds      yhat  yhat_lower  yhat_upper\n116 2026-07-01  0.028379    0.002644    0.054356\n117 2026-08-01  0.040224    0.012204    0.065805\n118 2026-09-01  0.025929    0.000122    0.052651\n119 2026-10-01  0.031740    0.003249    0.058092\n120 2026-11-01  0.022570   -0.004264    0.049011\n121 2026-12-01  0.036662    0.009381    0.062849\n122 2027-01-01  0.015244   -0.011366    0.041803\n123 2027-02-01  0.032056    0.006107    0.057913\n124 2027-03-01  0.038648    0.012149    0.066678\n125 2027-04-01  0.040247    0.012886    0.068205\n126 2027-05-01  0.033221    0.006923    0.062587\n127 2027-06-01  0.021895   -0.004357    0.046505",
+    "components": {
+      "yearly": {
+        "period": 365.25,
+        "fourier_order": 10,
+        "prior_scale": 10.0,
+        "mode": "additive",
+        "condition_name": null
+      }
+    }
+  },
+  "annual_percent_change": {
+    "apc": 1.739130434782609,
+    "apc_ci": [
+      -0.29970946667147963,
+      0.31785948489054133
+    ],
+    "slope": 1.0000000000000002,
+    "interpretation": "Increase: +1.7% per year (moderate growth)"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "phase": "F6_Visualization_Reporting",
+  "timestamp": "2026-06-14T23:58:58.472856",
+  "figures_created": 4,
+  "reports_created": 1,
+  "summary_statistics": {
+    "total_records": 11508,
+    "date_range": "2016-11-12 to 2026-06-10",
+    "platforms": 3,
+    "platform_breakdown": {
+      "twitter": 9264,
+      "threads": 1207,
+      "youtube": 1037
+    },
+    "sentiment_distribution": {
+      "NEUTRAL": 0.8284671532846716,
+      "POSITIVE": 0.102711157455683,
+      "NEGATIVE": 0.06882168925964546
+    },
+    "mean_sentiment_score": 0.01812352798876149,
+    "std_sentiment_score": 0.15881001224227875
+  }
+}

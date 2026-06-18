@@ -1,0 +1,209 @@
+2026-06-14 21:27:56 | INFO     | __main__ | Initializing Pipeline Orchestrator...
+2026-06-14 21:27:56 | INFO     | __main__ | 
+================================================================================
+2026-06-14 21:27:56 | INFO     | __main__ | DIABETES SOCIAL MEDIA SENTIMENT & TREND ANALYSIS PIPELINE
+2026-06-14 21:27:56 | INFO     | __main__ | Complete Framework 8V Implementation
+2026-06-14 21:27:56 | INFO     | __main__ | ================================================================================
+2026-06-14 21:27:56 | INFO     | __main__ | Start time: 2026-06-14 21:27:56.080598
+2026-06-14 21:27:56 | INFO     | __main__ | Project directory: C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis
+2026-06-14 21:27:56 | INFO     | __main__ | Output directory: C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\outputs\reports
+2026-06-14 21:27:56 | INFO     | __main__ | ================================================================================
+2026-06-14 21:27:56 | INFO     | __main__ | 
+Phases to execute: [1]
+
+2026-06-14 21:27:56 | INFO     | __main__ | 
+████████████████████████████████████████████████████████████████████████████████
+2026-06-14 21:27:56 | INFO     | __main__ | EXECUTING PHASE 1: DATA FOUNDATION
+2026-06-14 21:27:56 | INFO     | __main__ | ████████████████████████████████████████████████████████████████████████████████
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | Initializing Phase 1: Data Foundation
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | 
+================================================================================
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | PHASE 1: FONDASI DATA (Inventory, Load, Standardize, Validate)
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | ================================================================================
+
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | 
+[Step 1.1] Creating dataset inventory...
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | Creating dataset inventory...
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | Dataset inventory saved to C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\outputs\reports\Dataset_Inventory.csv
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | 
+Inventory:
+  platform                    filename  file_size_mb  columns  expected_records date_range              last_modified
+0  twitter          Diabetes_X_All.csv      2.817640        5              9253  2016-2026 2026-06-11 22:33:27.343001
+1  threads  threads_diabetes_final.csv      0.351486        4              1300  2024-2026 2026-06-11 22:31:18.572903
+2  youtube  youtube_merged_updated.csv      0.419207       11              1880  2018-2026 2026-06-11 22:32:41.395772
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | 
+[Step 1.2] Loading data from all platforms...
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | Loading all platform data...
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | Loading data for twitter...
+2026-06-14 21:27:56 | INFO     | F01_data_foundation |   Loaded Diabetes_X_All.csv: 9269 rows
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | Total records for twitter: 9269
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | Loading data for threads...
+2026-06-14 21:27:56 | INFO     | F01_data_foundation |   Loaded threads_diabetes_final.csv: 1299 rows
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | Total records for threads: 1299
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | Loading data for youtube...
+2026-06-14 21:27:56 | INFO     | F01_data_foundation |   Loaded youtube_merged_updated.csv: 1818 rows
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | Total records for youtube: 1818
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | Loading data for google_trends...
+2026-06-14 21:27:56 | WARNING  | F01_data_foundation | No files found for pattern google_trends_data.csv
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | 
+[Step 1.3-1.5] Processing, standardizing, and validating each platform...
+
+2026-06-14 21:27:56 | INFO     | F01_data_foundation | 
+--- Processing TWITTER ---
+2026-06-14 21:28:02 | INFO     | F01_data_foundation |   Timestamps standardized for twitter
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Handling missing values for twitter...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Handling duplicates for twitter...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation |   Removed 0 duplicates (0.00%)
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Cleaning text content for twitter...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation |   Removed 0 short texts
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Validating data for twitter...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation |   Quality metrics: {
+  "platform": "twitter",
+  "total_records": 9269,
+  "date_range": "2016-11-12 07:00:00+07:00 to 2026-06-10 07:00:00+07:00",
+  "date_completeness": 1.0,
+  "content_completeness": 1.0,
+  "content_valid_length": 1.0,
+  "duplicate_percentage": 0.0
+}
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Exported twitter to C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\data\processed\twitter_processed.parquet
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Exported twitter to C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\data\processed\twitter_processed.csv
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | 
+--- Processing THREADS ---
+2026-06-14 21:28:02 | INFO     | F01_data_foundation |   Timestamps standardized for threads
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Handling missing values for threads...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Handling duplicates for threads...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation |   Removed 1242 duplicates (95.91%)
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Cleaning text content for threads...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation |   Removed 0 short texts
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Validating data for threads...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation |   Quality metrics: {
+  "platform": "threads",
+  "total_records": 53,
+  "date_range": "2024-02-20 07:00:00+07:00 to 2026-05-11 07:00:00+07:00",
+  "date_completeness": 1.0,
+  "content_completeness": 1.0,
+  "content_valid_length": 1.0,
+  "duplicate_percentage": 0.0
+}
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Exported threads to C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\data\processed\threads_processed.parquet
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Exported threads to C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\data\processed\threads_processed.csv
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | 
+--- Processing YOUTUBE ---
+2026-06-14 21:28:02 | INFO     | F01_data_foundation |   Timestamps standardized for youtube
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Handling missing values for youtube...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Handling duplicates for youtube...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation |   Removed 1092 duplicates (99.54%)
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Cleaning text content for youtube...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation |   Removed 0 short texts
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Validating data for youtube...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation |   Quality metrics: {
+  "platform": "youtube",
+  "total_records": 5,
+  "date_range": "2024-11-15 18:34:24+07:00 to 2026-04-07 00:54:13+07:00",
+  "date_completeness": 1.0,
+  "content_completeness": 1.0,
+  "content_valid_length": 1.0,
+  "duplicate_percentage": 0.0
+}
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Exported youtube to C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\data\processed\youtube_processed.parquet
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Exported youtube to C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\data\processed\youtube_processed.csv
+2026-06-14 21:28:02 | WARNING  | F01_data_foundation | No data for google_trends, skipping
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | 
+[Step 1.6] Creating unified master dataset...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Creating unified master file...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Master file created: 9327 total records
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Master dataset exported to C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\data\processed\master_dataset_unified.csv
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Also saved as parquet: C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\data\processed\master_dataset_unified.parquet
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | 
+Generating quality report...
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | Quality report saved to C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\outputs\reports\Phase1_Data_Quality_Report.txt
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | 
+
+================================================================================
+DATA QUALITY REPORT
+================================================================================
+
+[TWITTER]
+----------------------------------------
+  duplicates_removed................. 0
+  total_records...................... 9269
+  date_range......................... 2016-11-12 07:00:00+07:00 to 2026-06-10 07:00:00+07:00
+  date_completeness.................. 1.00
+  content_completeness............... 1.00
+  content_valid_length............... 1.00
+  duplicate_percentage............... 0.00
+
+[THREADS]
+----------------------------------------
+  duplicates_removed................. 1242
+  total_records...................... 53
+  date_range......................... 2024-02-20 07:00:00+07:00 to 2026-05-11 07:00:00+07:00
+  date_completeness.................. 1.00
+  content_completeness............... 1.00
+  content_valid_length............... 1.00
+  duplicate_percentage............... 0.00
+
+[YOUTUBE]
+----------------------------------------
+  duplicates_removed................. 1092
+  total_records...................... 5
+  date_range......................... 2024-11-15 18:34:24+07:00 to 2026-04-07 00:54:13+07:00
+  date_completeness.................. 1.00
+  content_completeness............... 1.00
+  content_valid_length............... 1.00
+  duplicate_percentage............... 0.00
+
+================================================================================
+
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | ================================================================================
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | PHASE 1 COMPLETED SUCCESSFULLY
+2026-06-14 21:28:02 | INFO     | F01_data_foundation | ================================================================================
+
+2026-06-14 21:28:02 | INFO     | __main__ | 
+✓ Phase 1 completed successfully
+2026-06-14 21:28:02 | INFO     | __main__ |   Platforms processed: ['twitter', 'threads', 'youtube']
+2026-06-14 21:28:02 | INFO     | __main__ |   Master dataset: (9327, 16)
+2026-06-14 21:28:02 | INFO     | __main__ | 
+================================================================================
+2026-06-14 21:28:02 | INFO     | __main__ | GENERATING FINAL REPORT
+2026-06-14 21:28:02 | INFO     | __main__ | ================================================================================
+2026-06-14 21:28:02 | INFO     | __main__ | 
+    ================================================================================
+    PIPELINE EXECUTION REPORT
+    ================================================================================
+
+    Execution Summary:
+    Start Time: 2026-06-14T21:27:56.080598
+    End Time: 2026-06-14T21:28:02.981875
+    Total Duration: 6.9 seconds (~0.1 minutes) if summary['duration_seconds'] else 'N/A'
+    
+    Phase Status:
+      Phase 1: Data Foundation......................... SUCCESS
+  Phase 2: Veracity Validation..................... NOT RUN
+  Phase 3: Sentiment Analysis...................... NOT RUN
+  Phase 4: Google Trends Integration............... NOT RUN
+  Phase 5: Longitudinal Modeling................... NOT RUN
+  Phase 6: Visualization & Reporting............... NOT RUN
+
+✓ NO ERRORS - Pipeline completed successfully!
+
+    Output Files:
+    Reports: C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\outputs\reports
+    Figures: C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\outputs\figures
+    Processed Data: C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\data\processed
+
+    ================================================================================
+    End of Report - 2026-06-14 21:28:02
+    ================================================================================
+    
+2026-06-14 21:28:02 | INFO     | __main__ | Final report saved to C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\outputs\reports\PIPELINE_EXECUTION_REPORT.txt
+2026-06-14 21:28:02 | INFO     | __main__ | 
+================================================================================
+2026-06-14 21:28:02 | INFO     | __main__ | PIPELINE SUMMARY
+2026-06-14 21:28:02 | INFO     | __main__ | ================================================================================
+2026-06-14 21:28:02 | INFO     | __main__ | Status: ✓ SUCCESS
+2026-06-14 21:28:02 | INFO     | __main__ | Duration: 6.9 seconds
+2026-06-14 21:28:02 | INFO     | __main__ | Total Errors: 0
+2026-06-14 21:28:02 | INFO     | __main__ | Total Errors: 0
+2026-06-14 21:28:02 | INFO     | __main__ | ================================================================================

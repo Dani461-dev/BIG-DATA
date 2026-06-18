@@ -1,0 +1,67 @@
+# ============================================================================
+# DIABETES SOCIAL MEDIA SENTIMENT & TREND ANALYSIS - COMPLETE PIPELINE
+# Requirements File for Environment Setup
+# ============================================================================
+
+# Core Data Processing
+pandas
+numpy
+scipy
+scikit-learn
+
+# NLP & Sentiment Analysis
+transformers
+torch
+nltk
+TextBlob
+vaderSentiment
+sastrawi  # Indonesian stemmer
+
+# Time Series & Forecasting
+statsmodels
+pmdarima  # Auto ARIMA
+prophet
+sktime
+
+# Google Trends
+pytrends
+
+# Visualization
+matplotlib
+seaborn
+plotly
+plotly-express
+bokeh
+
+# Statistical Testing & Analysis
+scipy
+statsmodels
+pingouin
+
+# Data Validation & Quality
+great_expectations
+ydata-profiling
+
+# Database & Caching
+sqlalchemy
+
+# Utility & Configuration
+python-dotenv
+pyyaml
+tqdm
+loguru
+
+# Jupyter & Notebook Support (optional)
+jupyter
+jupyterlab
+notebook
+ipython
+
+# Development Tools
+pytest
+black
+flake8
+pre-commit
+
+# Reproducibility
+kaleido # For HTML to image conversion

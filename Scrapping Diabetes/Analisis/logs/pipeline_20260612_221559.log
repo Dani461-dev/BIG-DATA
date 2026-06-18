@@ -1,0 +1,50 @@
+2026-06-12 22:16:02 | INFO     | __main__ | Initializing Phase 1: Data Foundation
+2026-06-12 22:16:02 | INFO     | __main__ | 
+================================================================================
+2026-06-12 22:16:02 | INFO     | __main__ | PHASE 1: FONDASI DATA (Inventory, Load, Standardize, Validate)
+2026-06-12 22:16:02 | INFO     | __main__ | ================================================================================
+
+2026-06-12 22:16:02 | INFO     | __main__ | 
+[Step 1.1] Creating dataset inventory...
+2026-06-12 22:16:02 | INFO     | __main__ | Creating dataset inventory...
+2026-06-12 22:16:03 | INFO     | __main__ | Dataset inventory saved to C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\outputs\reports\Dataset_Inventory.csv
+2026-06-12 22:16:03 | INFO     | __main__ | 
+Inventory:
+  platform                    filename  file_size_mb  columns  expected_records date_range              last_modified
+0  threads  threads_diabetes_final.csv      0.351486        4              1300  2024-2026 2026-06-11 22:31:18.572903
+1  youtube  youtube_merged_updated.csv      0.419207       11              1880  2018-2026 2026-06-11 22:32:41.395772
+2026-06-12 22:16:03 | INFO     | __main__ | 
+[Step 1.2] Loading data from all platforms...
+2026-06-12 22:16:03 | INFO     | __main__ | Loading all platform data...
+2026-06-12 22:16:03 | INFO     | __main__ | Loading data for twitter...
+2026-06-12 22:16:03 | WARNING  | __main__ | No files found for pattern twitter_*.csv
+2026-06-12 22:16:03 | INFO     | __main__ | Loading data for threads...
+2026-06-12 22:16:03 | INFO     | __main__ |   Loaded threads_diabetes_final.csv: 1299 rows
+2026-06-12 22:16:03 | INFO     | __main__ | Total records for threads: 1299
+2026-06-12 22:16:03 | INFO     | __main__ | Loading data for youtube...
+2026-06-12 22:16:03 | INFO     | __main__ |   Loaded youtube_merged_updated.csv: 1818 rows
+2026-06-12 22:16:03 | INFO     | __main__ | Total records for youtube: 1818
+2026-06-12 22:16:03 | INFO     | __main__ | Loading data for google_trends...
+2026-06-12 22:16:03 | WARNING  | __main__ | No files found for pattern trends_*.csv
+2026-06-12 22:16:03 | INFO     | __main__ | 
+[Step 1.3-1.5] Processing, standardizing, and validating each platform...
+
+2026-06-12 22:16:03 | WARNING  | __main__ | No data for twitter, skipping
+2026-06-12 22:16:03 | INFO     | __main__ | 
+--- Processing THREADS ---
+2026-06-12 22:16:11 | INFO     | __main__ |   Timestamps standardized for threads
+2026-06-12 22:16:11 | INFO     | __main__ | Handling missing values for threads...
+2026-06-12 22:16:11 | INFO     | __main__ | Handling duplicates for threads...
+2026-06-12 22:16:11 | INFO     | __main__ |   Removed 1242 duplicates (95.91%)
+2026-06-12 22:16:11 | INFO     | __main__ | Cleaning text content for threads...
+2026-06-12 22:16:11 | INFO     | __main__ |   Removed 0 short texts
+2026-06-12 22:16:11 | INFO     | __main__ | Validating data for threads...
+2026-06-12 22:16:11 | INFO     | __main__ |   Quality metrics: {
+  "platform": "threads",
+  "total_records": 53,
+  "date_range": "2024-02-20 07:00:00+07:00 to 2026-05-11 07:00:00+07:00",
+  "date_completeness": 1.0,
+  "content_completeness": 1.0,
+  "content_valid_length": 1.0,
+  "duplicate_percentage": 0.0
+}

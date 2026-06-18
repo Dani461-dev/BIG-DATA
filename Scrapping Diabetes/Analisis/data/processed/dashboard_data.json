@@ -1,0 +1,108 @@
+{
+  "metadata": {
+    "title": "Diabetes Digital Health Indonesia",
+    "subtitle": "11-Year Social Media Analysis (2015-2026)",
+    "last_updated": "2026-06-18T20:02:18.213078",
+    "data_period": "2016-11-12 to 2026-06-10"
+  },
+  "kpi": {
+    "total_posts": 11508,
+    "platforms": 3,
+    "years_analyzed": 11,
+    "days_coverage": 3986
+  },
+  "sentiment": {
+    "positive_pct": 8.437608620090371,
+    "neutral_pct": 38.79040667361836,
+    "negative_pct": 52.77198470629128,
+    "mean_score": -0.04773989696605769
+  },
+  "platforms": {
+    "twitter": {
+      "total": 9264,
+      "percentage": 80.50052137643378,
+      "positive_pct": 6.239205526770294,
+      "mean_sentiment": -0.058702579008949166
+    },
+    "youtube": {
+      "total": 1037,
+      "percentage": 9.011122697254084,
+      "positive_pct": 24.397299903567983,
+      "mean_sentiment": 0.04113181223872023
+    },
+    "threads": {
+      "total": 1207,
+      "percentage": 10.48835592631213,
+      "positive_pct": 11.5990057995029,
+      "mean_sentiment": -0.0399533816388068
+    }
+  },
+  "yearly_trend": [
+    {
+      "year": 2016,
+      "posts": 102,
+      "positive_pct": 3.9215686274509802,
+      "mean_sentiment": -0.06662932433886536
+    },
+    {
+      "year": 2017,
+      "posts": 669,
+      "positive_pct": 2.391629297458894,
+      "mean_sentiment": -0.07912673750237317
+    },
+    {
+      "year": 2018,
+      "posts": 756,
+      "positive_pct": 6.613756613756613,
+      "mean_sentiment": -0.055281548041659946
+    },
+    {
+      "year": 2019,
+      "posts": 1014,
+      "positive_pct": 5.818540433925049,
+      "mean_sentiment": -0.05799720873448925
+    },
+    {
+      "year": 2020,
+      "posts": 1423,
+      "positive_pct": 6.605762473647224,
+      "mean_sentiment": -0.054605935262113825
+    },
+    {
+      "year": 2021,
+      "posts": 1204,
+      "positive_pct": 8.471760797342192,
+      "mean_sentiment": -0.052435664944207004
+    },
+    {
+      "year": 2022,
+      "posts": 1055,
+      "positive_pct": 5.402843601895735,
+      "mean_sentiment": -0.05418357772125465
+    },
+    {
+      "year": 2023,
+      "posts": 1139,
+      "positive_pct": 5.092186128182616,
+      "mean_sentiment": -0.05673520163046977
+    },
+    {
+      "year": 2024,
+      "posts": 1462,
+      "positive_pct": 13.406292749658002,
+      "mean_sentiment": -0.029057337317374254
+    },
+    {
+      "year": 2025,
+      "posts": 1044,
+      "positive_pct": 13.697318007662835,
+      "mean_sentiment": -0.024867994064734732
+    },
+    {
+      "year": 2026,
+      "posts": 1640,
+      "positive_pct": 11.707317073170733,
+      "mean_sentiment": -0.03536028490978467
+    }
+  ]
+}

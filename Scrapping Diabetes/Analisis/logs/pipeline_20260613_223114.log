@@ -1,0 +1,28 @@
+2026-06-13 22:31:14 | INFO     | __main__ | Initializing Pipeline Orchestrator...
+2026-06-13 22:31:14 | INFO     | __main__ | 
+================================================================================
+2026-06-13 22:31:14 | INFO     | __main__ | DIABETES SOCIAL MEDIA SENTIMENT & TREND ANALYSIS PIPELINE
+2026-06-13 22:31:14 | INFO     | __main__ | Complete Framework 8V Implementation
+2026-06-13 22:31:14 | INFO     | __main__ | ================================================================================
+2026-06-13 22:31:14 | INFO     | __main__ | Start time: 2026-06-13 22:31:14.801954
+2026-06-13 22:31:14 | INFO     | __main__ | Project directory: C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis
+2026-06-13 22:31:14 | INFO     | __main__ | Output directory: C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\outputs\reports
+2026-06-13 22:31:14 | INFO     | __main__ | ================================================================================
+2026-06-13 22:31:14 | INFO     | __main__ | 
+Phases to execute: [1, 2, 3, 4, 5, 6]
+
+2026-06-13 22:31:14 | INFO     | __main__ | 
+████████████████████████████████████████████████████████████████████████████████
+2026-06-13 22:31:14 | INFO     | __main__ | EXECUTING PHASE 1: DATA FOUNDATION
+2026-06-13 22:31:14 | INFO     | __main__ | ████████████████████████████████████████████████████████████████████████████████
+2026-06-13 22:31:14 | ERROR    | __main__ | Phase 1 FAILED: expected an indented block after 'if' statement on line 282 (F01_data_foundation.py, line 283)
+2026-06-13 22:31:14 | WARNING  | __main__ | Phase 1 failed, stopping pipeline
+2026-06-13 22:31:14 | INFO     | __main__ | 
+================================================================================
+2026-06-13 22:31:14 | INFO     | __main__ | PIPELINE SUMMARY
+2026-06-13 22:31:14 | INFO     | __main__ | ================================================================================
+2026-06-13 22:31:14 | INFO     | __main__ | Status: ✗ FAILED
+2026-06-13 22:31:14 | INFO     | __main__ | Duration: N/A
+2026-06-13 22:31:14 | INFO     | __main__ | Total Errors: 1
+2026-06-13 22:31:14 | INFO     | __main__ | Total Errors: 1
+2026-06-13 22:31:14 | INFO     | __main__ | ================================================================================

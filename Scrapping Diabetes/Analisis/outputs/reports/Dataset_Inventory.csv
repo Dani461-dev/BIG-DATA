@@ -1,0 +1,4 @@
+platform,filename,file_size_mb,columns,expected_records,date_range,last_modified
+twitter,Diabetes_X_All.csv,2.8176403045654297,5,9253,2016-2026,2026-06-11 22:33:27.343001
+threads,threads_diabetes_final.csv,0.3514862060546875,4,1300,2024-2026,2026-06-11 22:31:18.572903
+youtube,youtube_merged_updated.csv,0.4192066192626953,11,1880,2018-2026,2026-06-11 22:32:41.395772

@@ -1,0 +1,39 @@
+{
+  "twitter": {
+    "platform": "twitter",
+    "total_posts": 9264,
+    "date_range": "2016-11-12 to 2026-06-10",
+    "description": "Real-time reactions, news coverage, public discourse",
+    "characteristics": {
+      "use_case": "Breaking news, viral moments, emotional reactions",
+      "audience": "All demographics, but younger dominant",
+      "reliability": "Mixed - includes misinformation",
+      "time_sensitivity": "Very high - daily changes"
+    }
+  },
+  "youtube": {
+    "platform": "youtube",
+    "total_videos": 1037,
+    "date_range": "2018-01-03 to 2026-04-07",
+    "description": "Educational content, expert discussions, long-form content",
+    "characteristics": {
+      "use_case": "Education, credible sources, detailed explanations",
+      "audience": "Diverse, health-conscious viewers",
+      "reliability": "Higher - usually from credible creators",
+      "time_sensitivity": "Lower - evergreen content"
+    }
+  },
+  "threads": {
+    "platform": "threads",
+    "total_discussions": 1207,
+    "date_range": "2024-02-20 to 2026-05-14",
+    "description": "Peer support, community discussions, personal experiences",
+    "characteristics": {
+      "use_case": "Patient stories, peer support, lived experiences",
+      "audience": "Engaged patients, caregivers",
+      "reliability": "Mixed - authentic but not always medically accurate",
+      "time_sensitivity": "Medium"
+    }
+  },
+  "template_file": "C:\\Users\\shofi\\Documents\\Big Data Diabetes\\BIG-DATA\\Scrapping Diabetes\\Analisis\\outputs\\reports\\Comparison_Template_Riskesdas_IDF.xlsx"
+}

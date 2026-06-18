@@ -1,0 +1,79 @@
+{
+  "phase": "F8_Integrated_Insights",
+  "timestamp": "2026-06-18T20:02:15.435507",
+  "sentiment_analysis": {
+    "name": "Integrated Sentiment Analysis",
+    "total_records": 11508,
+    "platforms": [
+      "twitter",
+      "youtube",
+      "threads"
+    ],
+    "overall_sentiment": {
+      "positive": 8.437608620090371,
+      "neutral": 38.79040667361836,
+      "negative": 52.77198470629128
+    },
+    "mean_sentiment_score": -0.04773989696605769,
+    "std_sentiment_score": 0.13925295895653947,
+    "platform_sentiment": {
+      "twitter": {
+        "total": 9264,
+        "positive_pct": 6.239205526770294,
+        "neutral_pct": 38.12607944732297,
+        "negative_pct": 55.634715025906736,
+        "mean_sentiment": -0.058702579008949166
+      },
+      "youtube": {
+        "total": 1037,
+        "positive_pct": 24.397299903567983,
+        "neutral_pct": 40.50144648023144,
+        "negative_pct": 35.10125361620058,
+        "mean_sentiment": 0.04113181223872023
+      },
+      "threads": {
+        "total": 1207,
+        "positive_pct": 11.5990057995029,
+        "neutral_pct": 42.419221209610605,
+        "negative_pct": 45.98177299088649,
+        "mean_sentiment": -0.0399533816388068
+      }
+    }
+  },
+  "cross_platform": {
+    "name": "Cross-Platform Comparison",
+    "volume": {
+      "twitter": {
+        "count": 9264,
+        "percentage": 80.50052137643378
+      },
+      "threads": {
+        "count": 1207,
+        "percentage": 10.48835592631213
+      },
+      "youtube": {
+        "count": 1037,
+        "percentage": 9.011122697254084
+      }
+    },
+    "date_coverage": {
+      "twitter": {
+        "first_date": "2016-11-12 07:00:00+07:00",
+        "last_date": "2026-06-10 07:00:00+07:00",
+        "years_active": 9.574264202600958
+      },
+      "youtube": {
+        "first_date": "2018-01-03 18:22:23+07:00",
+        "last_date": "2026-04-07 00:54:13+07:00",
+        "years_active": 8.254620123203285
+      },
+      "threads": {
+        "first_date": "2024-02-20 07:00:00+07:00",
+        "last_date": "2026-05-14 07:00:00+07:00",
+        "years_active": 2.2286105407255303
+      }
+    }
+  },
+  "validation_framework": {
+    "name": "Validation Framework for Riskesdas & IDF",
+    "yearly_statistics": {

@@ -1,0 +1,223 @@
+{
+  "summary": {
+    "start_time": "2026-06-14T23:08:31.833669",
+    "end_time": "2026-06-14T23:59:00.336080",
+    "duration_seconds": 3028.502411,
+    "phase_status": {
+      "F1": "SUCCESS",
+      "F2": "SUCCESS",
+      "F3": "SUCCESS",
+      "F4": "SUCCESS",
+      "F5": "SUCCESS",
+      "F6": "SUCCESS"
+    },
+    "errors": [],
+    "total_errors": 0,
+    "success": true
+  },
+  "phase_results": {
+    "F1": {
+      "phase": "F1_Data_Foundation",
+      "timestamp": "2026-06-14T23:08:31.840797",
+      "platforms_processed": [
+        "twitter",
+        "threads",
+        "youtube"
+      ],
+      "quality_summary": {
+        "twitter": {
+          "platform": "twitter",
+          "total_records": 9264,
+          "date_range": "2016-11-12 07:00:00+07:00 to 2026-06-10 07:00:00+07:00",
+          "date_completeness": 1.0,
+          "content_completeness": 1.0,
+          "content_valid_length": 1.0,
+          "duplicate_percentage": 0.0
+        },
+        "threads": {
+          "platform": "threads",
+          "total_records": 1207,
+          "date_range": "2024-02-20 07:00:00+07:00 to 2026-05-14 07:00:00+07:00",
+          "date_completeness": 1.0,
+          "content_completeness": 1.0,
+          "content_valid_length": 1.0,
+          "duplicate_percentage": 0.0
+        },
+        "youtube": {
+          "platform": "youtube",
+          "total_records": 1037,
+          "date_range": "2018-01-03 18:22:23+07:00 to 2026-04-07 00:54:13+07:00",
+          "date_completeness": 1.0,
+          "content_completeness": 1.0,
+          "content_valid_length": 1.0,
+          "duplicate_percentage": 0.0
+        }
+      },
+      "master_dataset_shape": [
+        11508,
+        17
+      ],
+      "master_dataset_records_by_platform": {
+        "twitter": 9264,
+        "threads": 1207,
+        "youtube": 1037
+      }
+    },
+    "F2": {
+      "phase": "F2_Veracity_Validation",
+      "timestamp": "2026-06-14T23:08:33.669755",
+      "inter_rater_reliability": {
+        "total_samples": 300,
+        "agreement_pct": 81.33333333333333,
+        "cohens_kappa": 0.5439368026712273,
+        "agreement_strength": "Moderate",
+        "status": "revision_needed"
+      },
+      "gold_standard_records": 300
+    },
+    "F3": {
+      "phase": "F3_Sentiment_Analysis",
+      "timestamp": "2026-06-14T23:08:42.281414",
+      "main_corpus_records": 11508,
+      "sentiment_distribution": {
+        "NEUTRAL": 9534,
+        "POSITIVE": 1182,
+        "NEGATIVE": 792
+      }
+    },
+    "F4": {
+      "phase": "F4_Google_Trends_Integration",
+      "timestamp": "2026-06-14T23:58:52.579855",
+      "merged_signals_records": 116,
+      "stationarity_tests": {
+        "google_trends": {
+          "test_statistic": 1.1836692532946824,
+          "p_value": 0.9958710881177049,
+          "n_lags": 4,
+          "n_obs": 111,
+          "is_stationary": "False"
+        },
+        "social_media": {
+          "test_statistic": -1.518833177969254,
+          "p_value": 0.5241751181022648,
+          "n_lags": 3,
+          "n_obs": 112,
+          "is_stationary": "False"
+        }
+      },
+      "granger_trends_to_sm": {
+        "status": "error",
+        "error": "grangercausalitytests() got an unexpected keyword argument 'max_lag'. Did you mean 'maxlag'?"
+      },
+      "granger_sm_to_trends": {
+        "status": "error",
+        "error": "grangercausalitytests() got an unexpected keyword argument 'max_lag'. Did you mean 'maxlag'?"
+      },
+      "cross_correlation": {
+        "lags": [
+          -12,
+          -11,
+          -10,
+          -9,
+          -8,
+          -7,
+          -6,
+          -5,
+          -4,
+          -3,
+          -2,
+          -1,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "max_correlation": 0.9981823270227067,
+        "optimal_lag": -4,
+        "interpretation": "Strong Series 1 leads Series 2 by 4 month(s) (r=0.998)"
+      }
+    },
+    "F5": {
+      "phase": "F5_Longitudinal_Modeling",
+      "timestamp": "2026-06-14T23:58:54.388410",
+      "stl_decomposition": {
+        "status": "failed",
+        "error": "Unable to determine period from endog"
+      },
+      "arima_parameters": {
+        "status": "success",
+        "order": [
+          0,
+          1,
+          1
+        ],
+        "seasonal_order": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "aic": -548.8415355387732,
+        "bic": -543.3516712820467
+      },
+      "arima_fit": {
+        "status": "failed",
+        "error": "'ARIMAResults' object has no attribute 'diagnostics'"
+      },
+      "prophet_fit": {
+        "status": "success",
+        "forecast": "            ds      yhat  yhat_lower  yhat_upper\n116 2026-07-01  0.028379    0.002644    0.054356\n117 2026-08-01  0.040224    0.012204    0.065805\n118 2026-09-01  0.025929    0.000122    0.052651\n119 2026-10-01  0.031740    0.003249    0.058092\n120 2026-11-01  0.022570   -0.004264    0.049011\n121 2026-12-01  0.036662    0.009381    0.062849\n122 2027-01-01  0.015244   -0.011366    0.041803\n123 2027-02-01  0.032056    0.006107    0.057913\n124 2027-03-01  0.038648    0.012149    0.066678\n125 2027-04-01  0.040247    0.012886    0.068205\n126 2027-05-01  0.033221    0.006923    0.062587\n127 2027-06-01  0.021895   -0.004357    0.046505",
+        "components": {
+          "yearly": {
+            "period": 365.25,
+            "fourier_order": 10,
+            "prior_scale": 10.0,
+            "mode": "additive",
+            "condition_name": null
+          }
+        }
+      },
+      "annual_percent_change": {
+        "apc": 1.739130434782609,
+        "apc_ci": [
+          -0.29970946667147963,
+          0.31785948489054133
+        ],
+        "slope": 1.0000000000000002,
+        "interpretation": "Increase: +1.7% per year (moderate growth)"
+      }
+    },
+    "F6": {
+      "phase": "F6_Visualization_Reporting",
+      "timestamp": "2026-06-14T23:58:58.472856",
+      "figures_created": 4,
+      "reports_created": 1,
+      "summary_statistics": {
+        "total_records": 11508,
+        "date_range": "2016-11-12 to 2026-06-10",
+        "platforms": 3,
+        "platform_breakdown": {
+          "twitter": 9264,
+          "threads": 1207,
+          "youtube": 1037
+        },
+        "sentiment_distribution": {
+          "NEUTRAL": 0.8284671532846716,
+          "POSITIVE": 0.102711157455683,
+          "NEGATIVE": 0.06882168925964546
+        },
+        "mean_sentiment_score": 0.01812352798876149,
+        "std_sentiment_score": 0.15881001224227875
+      }
+    }
+  }
+}

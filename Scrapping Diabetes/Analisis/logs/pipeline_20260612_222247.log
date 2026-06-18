@@ -1,0 +1,25 @@
+2026-06-12 22:22:48 | INFO     | __main__ | Initializing Pipeline Orchestrator...
+2026-06-12 22:22:48 | INFO     | __main__ | 
+================================================================================
+2026-06-12 22:22:48 | INFO     | __main__ | DIABETES SOCIAL MEDIA SENTIMENT & TREND ANALYSIS PIPELINE
+2026-06-12 22:22:48 | INFO     | __main__ | Complete Framework 8V Implementation
+2026-06-12 22:22:48 | INFO     | __main__ | ================================================================================
+2026-06-12 22:22:48 | INFO     | __main__ | Start time: 2026-06-12 22:22:48.335168
+2026-06-12 22:22:48 | INFO     | __main__ | Project directory: C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis
+2026-06-12 22:22:48 | INFO     | __main__ | Output directory: C:\Users\shofi\Documents\Big Data Diabetes\BIG-DATA\Scrapping Diabetes\Analisis\outputs\reports
+2026-06-12 22:22:48 | INFO     | __main__ | ================================================================================
+2026-06-12 22:22:48 | INFO     | __main__ | 
+Phases to execute: [1, 2, 3, 4, 5, 6]
+
+2026-06-12 22:22:48 | INFO     | __main__ | 
+████████████████████████████████████████████████████████████████████████████████
+2026-06-12 22:22:48 | INFO     | __main__ | EXECUTING PHASE 1: DATA FOUNDATION
+2026-06-12 22:22:48 | INFO     | __main__ | ████████████████████████████████████████████████████████████████████████████████
+2026-06-12 22:22:48 | ERROR    | __main__ | Phase 1 FAILED: No module named 'F01_data_foundation'
+2026-06-12 22:22:48 | WARNING  | __main__ | Phase 1 failed, stopping pipeline
+2026-06-12 22:22:48 | INFO     | __main__ | 
+================================================================================
+2026-06-12 22:22:48 | INFO     | __main__ | PIPELINE SUMMARY
+2026-06-12 22:22:48 | INFO     | __main__ | ================================================================================
+2026-06-12 22:22:48 | INFO     | __main__ | Status: ✗ FAILED
+2026-06-12 22:22:48 | ERROR    | __main__ | Unexpected error: unsupported format string passed to NoneType.__format__

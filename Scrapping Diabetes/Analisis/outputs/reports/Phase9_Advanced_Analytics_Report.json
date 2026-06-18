@@ -1,0 +1,1234 @@
+{
+  "phase": "F9_Advanced_Analytics",
+  "timestamp": "2026-06-18T20:03:21.327122",
+  "topic_modeling": {
+    "n_topics": 10,
+    "coherence_score": 0.5244676961536574,
+    "topics": {
+      "topic_0": {
+        "terms": [
+          "ginjal",
+          "gagal",
+          "melitus",
+          "usia",
+          "muda",
+          "anak",
+          "kesehatan",
+          "hipertensi",
+          "bpjs",
+          "kronis"
+        ],
+        "weights": [
+          0.031348299235105515,
+          0.027636269107460976,
+          0.027019541710615158,
+          0.026296144351363182,
+          0.02422095276415348,
+          0.021138520911335945,
+          0.014267886988818645,
+          0.012792211957275867,
+          0.012784607708454132,
+          0.01019318774342537
+        ]
+      },
+      "topic_1": {
+        "terms": [
+          "manis",
+          "kencing",
+          "asam",
+          "urat",
+          "kaki",
+          "sakit",
+          "pas",
+          "gue",
+          "sampe",
+          "dokter"
+        ],
+        "weights": [
+          0.026936322450637817,
+          0.0243412796407938,
+          0.022814007475972176,
+          0.015679234638810158,
+          0.0150532191619277,
+          0.014406825415790081,
+          0.013866937719285488,
+          0.013350251130759716,
+          0.012961642816662788,
+          0.010701006278395653
+        ]
+      },
+      "topic_2": {
+        "terms": [
+          "indonesia",
+          "covid",
+          "meninggal",
+          "dunia",
+          "salah",
+          "orang",
+          "masyarakat",
+          "kematian",
+          "hidup",
+          "kesehatan"
+        ],
+        "weights": [
+          0.032311659306287766,
+          0.023465214297175407,
+          0.0202809926122427,
+          0.01850070431828499,
+          0.013518530875444412,
+          0.013505849055945873,
+          0.012772575952112675,
+          0.010629948228597641,
+          0.009602650068700314,
+          0.009583312086760998
+        ]
+      },
+      "topic_3": {
+        "terms": [
+          "luka",
+          "putih",
+          "org",
+          "dokter",
+          "kasih",
+          "terima",
+          "madu",
+          "baca",
+          "susah",
+          "nasi"
+        ],
+        "weights": [
+          0.026585843414068222,
+          0.018099641427397728,
+          0.015638655051589012,
+          0.012531859800219536,
+          0.011535846628248692,
+          0.0089538199827075,
+          0.00867624394595623,
+          0.008546407334506512,
+          0.0072833034209907055,
+          0.006585958879441023
+        ]
+      },
+      "topic_4": {
+        "terms": [
+          "membantu",
+          "mencegah",
+          "mengurangi",
+          "buah",
+          "menurunkan",
+          "kesehatan",
+          "tubuh",
+          "manfaat",
+          "risiko",
+          "meningkatkan"
+        ],
+        "weights": [
+          0.04226726293563843,
+          0.028560131788253784,
+          0.026473043486475945,
+          0.02621815912425518,
+          0.025320416316390038,
+          0.023817557841539383,
+          0.023502934724092484,
+          0.022344045341014862,
+          0.01892744190990925,
+          0.01616373285651207
+        ]
+      },
+      "topic_5": {
+        "terms": [
+          "kesihatan",
+          "malaysia",
+          "amp",
+          "obesiti",
+          "jantung",
+          "kronik",
+          "sihat",
+          "badan",
+          "berjangkit",
+          "pesakit"
+        ],
+        "weights": [
+          0.023841096088290215,
+          0.015080676414072514,
+          0.01486107986420393,
+          0.01276248600333929,
+          0.011974958702921867,
+          0.01050672959536314,
+          0.010324127040803432,
+          0.009974959306418896,
+          0.009852113202214241,
+          0.009233841672539711
+        ]
+      },
+      "topic_6": {
+        "terms": [
+          "makan",
+          "gula",
+          "gak",
+          "minum",
+          "kena",
+          "aja",
+          "kalo",
+          "sehat",
+          "pola",
+          "manis"
+        ],
+        "weights": [
+          0.0343615859746933,
+          0.022080009803175926,
+          0.01799967512488365,
+          0.01798521727323532,
+          0.01743989996612072,
+          0.01584743522107601,
+          0.015455357730388641,
+          0.013294221833348274,
+          0.012853295542299747,
+          0.012815611436963081
+        ]
+      },
+      "topic_7": {
+        "terms": [
+          "gula",
+          "darah",
+          "kadar",
+          "insulin",
+          "tubuh",
+          "daun",
+          "glukosa",
+          "stres",
+          "pengambilan",
+          "penderita"
+        ],
+        "weights": [
+          0.10853444784879684,
+          0.10641764849424362,
+          0.036163944751024246,
+          0.028578748926520348,
+          0.014405588619410992,
+          0.011670218780636787,
+          0.010669173672795296,
+          0.00902507733553648,
+          0.006623491179198027,
+          0.006114983931183815
+        ]
+      },
+      "topic_8": {
+        "terms": [
+          "jantung",
+          "risiko",
+          "hipertensi",
+          "obesitas",
+          "kanker",
+          "kak",
+          "stroke",
+          "kesehatan",
+          "ginjal",
+          "kronis"
+        ],
+        "weights": [
+          0.05500541254878044,
+          0.025351569056510925,
+          0.018447991460561752,
+          0.01703241467475891,
+          0.016797324642539024,
+          0.016438620164990425,
+          0.015725787729024887,
+          0.014269505627453327,
+          0.013502340763807297,
+          0.012076119892299175
+        ]
+      },
+      "topic_9": {
+        "terms": [
+          "obat",
+          "pasien",
+          "dokter",
+          "daun",
+          "pengobatan",
+          "herbal",
+          "thank",
+          "bermanfaat",
+          "virus",
+          "penyerta"
+        ],
+        "weights": [
+          0.04237116500735283,
+          0.030405130237340927,
+          0.026049600914120674,
+          0.019208773970603943,
+          0.01528805773705244,
+          0.010138710029423237,
+          0.007347506936639547,
+          0.006422043778002262,
+          0.006420064251869917,
+          0.0062129683792591095
+        ]
+      }
+    },
+    "n_documents": 11497
+  },
+  "emotion_summary": {
+    "mean_emotions": {
+      "fear": 0.021773259182018306,
+      "trust": 0.05736589039508747,
+      "joy": 0.009897462634688912,
+      "sadness": 0.020947746495191752,
+      "disgust": 0.0010746147607461477,
+      "anger": 0.002716950527169505,
+      "surprise": 0.0026358475263584752,
+      "anticipation": 0.0017668868033831537
+    },
+    "dominant_emotions": [
+      "trust",
+      "fear",
+      "sadness"
+    ]
+  },
+  "early_warning": {
+    "spike_detected": true,
+    "n_spikes": 6,
+    "spike_months": [
+      "2020-07",
+      "2024-03",
+      "2024-06",
+      "2025-02",
+      "2025-03",
+      "2025-07"
+    ]
+  },
+  "ddai": [
+    {
+      "year_month": "2016-11",
+      "volume_score": 1.8281535648994518,
+      "sentiment_score": 14.049891016914628,
+      "growth_score": 10.0,
+      "engagement_score": 4.854850031067578,
+      "ddai": 30.73289461288166
+    },
+    {
+      "year_month": "2016-12",
+      "volume_score": 0.5118829981718465,
+      "sentiment_score": 13.930087446349008,
+      "growth_score": 3.9999999999999996,
+      "engagement_score": 3.4967892163656895,
+      "ddai": 21.938759660886546
+    },
+    {
+      "year_month": "2017-01",
+      "volume_score": 2.5594149908592323,
+      "sentiment_score": 13.924535591002874,
+      "growth_score": 20.0,
+      "engagement_score": 3.161027433731759,
+      "ddai": 39.644978015593864
+    },
+    {
+      "year_month": "2017-02",
+      "volume_score": 0.5850091407678245,
+      "sentiment_score": 13.79166832607846,
+      "growth_score": 2.285714285714286,
+      "engagement_score": 3.563726702366843,
+      "ddai": 20.226118454927413
+    },
+    {
+      "year_month": "2017-03",
+      "volume_score": 0.8775137111517367,
+      "sentiment_score": 13.625840634447464,
+      "growth_score": 11.86046511627907,
+      "engagement_score": 3.14956939007914,
+      "ddai": 29.513388851957412
+    },
+    {
+      "year_month": "2017-04",
+      "volume_score": 1.170018281535649,
+      "sentiment_score": 14.061990774379057,
+      "growth_score": 11.702127659574467,
+      "engagement_score": 3.6755934780032042,
+      "ddai": 30.60973019349238
+    },
+    {
+      "year_month": "2017-05",
+      "volume_score": 0.29250457038391225,
+      "sentiment_score": 13.803092430041387,
+      "growth_score": 5.2941176470588225,
+      "engagement_score": 5.777104416384742,
+      "ddai": 25.16681906386886
+    },
+    {
+      "year_month": "2017-06",
+      "volume_score": 0.0,
+      "sentiment_score": 13.625953576632906,
+      "growth_score": 7.948717948717949,
+      "engagement_score": 3.229228801604397,
+      "ddai": 24.80390032695525
+    },
+    {
+      "year_month": "2017-07",
+      "volume_score": 0.14625228519195613,
+      "sentiment_score": 13.470475974469572,
+      "growth_score": 11.142857142857144,
+      "engagement_score": 4.086768050883366,
+      "ddai": 28.84635345340204
+    },
+    {
+      "year_month": "2017-08",
+      "volume_score": 0.21937842778793418,
+      "sentiment_score": 13.838472579943506,
+      "growth_score": 10.54054054054054,
+      "engagement_score": 6.270342447254683,
+      "ddai": 30.868733995526664
+    },
+    {
+      "year_month": "2017-09",
+      "volume_score": 0.5118829981718465,
+      "sentiment_score": 13.92940373420715,
+      "growth_score": 12.10526315789474,
+      "engagement_score": 3.186081354089548,
+      "ddai": 29.732631244363287
+    },
+    {
+      "year_month": "2017-10",
+      "volume_score": 1.0968921389396709,
+      "sentiment_score": 13.654423052501679,
+      "growth_score": 13.80952380952381,
+      "engagement_score": 3.1718822746675115,
+      "ddai": 31.73272127563267
+    },
+    {
+      "year_month": "2017-11",
+      "volume_score": 9.140767824497258,
+      "sentiment_score": 13.922443444338441,
+      "growth_score": 20.0,
+      "engagement_score": 4.364410361217284,
+      "ddai": 47.42762163005298
+    },
+    {
+      "year_month": "2017-12",
+      "volume_score": 1.6087751371115175,
+      "sentiment_score": 13.697935278189808,
+      "growth_score": 0.0,
+      "engagement_score": 3.391737895385285,
+      "ddai": 18.69844831068661
+    },
+    {
+      "year_month": "2018-01",
+      "volume_score": 6.1425959780621575,
+      "sentiment_score": 14.272382236768072,
+      "growth_score": 20.0,
+      "engagement_score": 5.645541532252414,
+      "ddai": 46.060519747082644
+    },
+    {
+      "year_month": "2018-02",
+      "volume_score": 0.29250457038391225,
+      "sentiment_score": 14.152698831998384,
+      "growth_score": 0.0,
+      "engagement_score": 4.510415359658081,
+      "ddai": 18.955618762040377
+    },
+    {
+      "year_month": "2018-03",
+      "volume_score": 1.3162705667276051,
+      "sentiment_score": 14.034800016408338,
+      "growth_score": 17.179487179487182,
+      "engagement_score": 5.462644506282211,
+      "ddai": 37.993202268905335
+    },
+    {
+      "year_month": "2018-04",
+      "volume_score": 2.047531992687386,
+      "sentiment_score": 14.499804619789122,
+      "growth_score": 13.773584905660378,
+      "engagement_score": 5.139101653543685,
+      "ddai": 35.46002317168057
+    },
+    {
+      "year_month": "2018-05",
+      "volume_score": 0.29250457038391225,
+      "sentiment_score": 13.940187473700595,
+      "growth_score": 2.380952380952381,
+      "engagement_score": 4.935056037390455,
+      "ddai": 21.54870046242734
+    },
+    {
+      "year_month": "2018-06",
+      "volume_score": 0.5118829981718465,
+      "sentiment_score": 13.917434500796455,
+      "growth_score": 11.538461538461538,
+      "engagement_score": 6.268818897908016,
+      "ddai": 32.236597935337855
+    },
+    {
+      "year_month": "2018-07",
+      "volume_score": 1.8281535648994518,
+      "sentiment_score": 14.234639820623396,
+      "growth_score": 18.571428571428573,
+      "engagement_score": 6.298851298161111,
+      "ddai": 40.93307325511253
+    },
+    {
+      "year_month": "2018-08",
+      "volume_score": 1.3162705667276051,
+      "sentiment_score": 13.849470630951645,
+      "growth_score": 7.666666666666666,
+      "engagement_score": 4.2633939266133245,
+      "ddai": 27.095801790959243
+    },
+    {
+      "year_month": "2018-09",
+      "volume_score": 1.6087751371115175,
+      "sentiment_score": 14.054921242713927,
+      "growth_score": 11.509433962264152,
+      "engagement_score": 6.31337211640841,
+      "ddai": 33.48650245849801
+    },
+    {
+      "year_month": "2018-10",
+      "volume_score": 2.7787934186471666,
+      "sentiment_score": 14.546444763647365,
+      "growth_score": 15.6140350877193,
+      "engagement_score": 5.337042233559018,
+      "ddai": 38.276315503572846
+    },
+    {
+      "year_month": "2018-11",
+      "volume_score": 5.2650822669104205,
+      "sentiment_score": 14.207802490632211,
+      "growth_score": 19.31506849315069,
+      "engagement_score": 4.2653882097845335,
+      "ddai": 43.05334146047785
+    },
+    {
+      "year_month": "2018-12",
+      "volume_score": 1.170018281535649,
+      "sentiment_score": 13.840209302032696,
+      "growth_score": 0.0,
+      "engagement_score": 5.615269168357163,
+      "ddai": 20.625496751925507
+    },
+    {
+      "year_month": "2019-01",
+      "volume_score": 3.217550274223035,
+      "sentiment_score": 13.867891254702702,
+      "growth_score": 20.0,
+      "engagement_score": 3.9123361631654925,
+      "ddai": 40.99777769209123
+    },
+    {
+      "year_month": "2019-02",
+      "volume_score": 0.9506398537477149,
+      "sentiment_score": 14.071309118745,
+      "growth_score": 2.151898734177216,
+      "engagement_score": 5.613592823685181,
+      "ddai": 22.787440530355113
+    },
+    {
+      "year_month": "2019-03",
+      "volume_score": 3.1444241316270567,
+      "sentiment_score": 14.351239201527374,
+      "growth_score": 20.0,
+      "engagement_score": 5.131366209358479,
+      "ddai": 42.627029542512915
+    },
+    {
+      "year_month": "2019-04",
+      "volume_score": 3.510054844606947,
+      "sentiment_score": 14.00736375974747,
+      "growth_score": 11.282051282051283,
+      "engagement_score": 4.031173850093596,
+      "ddai": 32.8306437364993
+    },
+    {
+      "year_month": "2019-05",
+      "volume_score": 4.753199268738574,
+      "sentiment_score": 13.861951189055443,
+      "growth_score": 14.096385542168676,
+      "engagement_score": 5.801451537744511,
+      "ddai": 38.512987537707204
+    },
+    {
+      "year_month": "2019-06",
+      "volume_score": 2.5594149908592323,
+      "sentiment_score": 14.169866859565461,
+      "growth_score": 3.9999999999999996,
+      "engagement_score": 6.613290934368859,
+      "ddai": 27.342572784793553
+    },
+    {
+      "year_month": "2019-07",
+      "volume_score": 2.26691042047532,
+      "sentiment_score": 14.420174332293595,
+      "growth_score": 8.857142857142858,
+      "engagement_score": 5.922156863399113,
+      "ddai": 31.466384473310885
+    },
+    {
+      "year_month": "2019-08",
+      "volume_score": 3.5831809872029257,
+      "sentiment_score": 14.430955271211538,
+      "growth_score": 15.454545454545453,
+      "engagement_score": 7.045715818886254,
+      "ddai": 40.51439753184617
+    },
+    {
+      "year_month": "2019-09",
+      "volume_score": 2.8519195612431445,
+      "sentiment_score": 14.673965117744496,
+      "growth_score": 7.6190476190476195,
+      "engagement_score": 4.359342008701531,
+      "ddai": 29.504274306736793
+    },
+    {
+      "year_month": "2019-10",
+      "volume_score": 3.7294332723948815,
+      "sentiment_score": 13.702530909760053,
+      "growth_score": 13.243243243243242,
+      "engagement_score": 5.673480782133485,
+      "ddai": 36.348688207531666
+    },
+    {
+      "year_month": "2019-11",
+      "volume_score": 8.70201096892139,
+      "sentiment_score": 14.183170413650215,
+      "growth_score": 20.0,
+      "engagement_score": 6.089350141460396,
+      "ddai": 48.974531524031995
+    },
+    {
+      "year_month": "2019-12",
+      "volume_score": 4.16819012797075,
+      "sentiment_score": 13.960342283762019,
+      "growth_score": 1.9480519480519476,
+      "engagement_score": 6.771256644502817,
+      "ddai": 26.847841004287535
+    },
+    {
+      "year_month": "2020-01",
+      "volume_score": 3.5831809872029257,
+      "sentiment_score": 14.338624335194119,
+      "growth_score": 8.26086956521739,
+      "engagement_score": 6.401265926534123,
+      "ddai": 32.58394081414856
+    },
+    {
+      "year_month": "2020-02",
+      "volume_score": 5.557586837294333,
+      "sentiment_score": 14.336479537151954,
+      "growth_score": 16.428571428571427,
+      "engagement_score": 7.895859986117687,
+      "ddai": 44.2184977891354
+    },
+    {
+      "year_month": "2020-03",
+      "volume_score": 11.407678244972578,
+      "sentiment_score": 13.993766753975633,
+      "growth_score": 20.0,
+      "engagement_score": 6.2331575860155,
+      "ddai": 51.63460258496371
+    },
+    {
+      "year_month": "2020-04",
+      "volume_score": 6.581352833638026,
+      "sentiment_score": 13.988917167893495,
+      "growth_score": 3.089005235602093,
+      "engagement_score": 6.1358965728297665,
+      "ddai": 29.795171809963385
+    },
+    {
+      "year_month": "2020-05",
+      "volume_score": 6.727605118829982,
+      "sentiment_score": 13.918460023659506,
+      "growth_score": 10.32,
+      "engagement_score": 6.387888437260978,
+      "ddai": 37.35395357975047
+    },
+    {
+      "year_month": "2020-06",
+      "volume_score": 4.680073126142596,
+      "sentiment_score": 14.421356473474791,
+      "growth_score": 5.590551181102362,
+      "engagement_score": 6.059667139245976,
+      "ddai": 30.751647919965727
+    },
+    {
+      "year_month": "2020-07",
+      "volume_score": 6.581352833638026,
+      "sentiment_score": 14.782618074291229,
+      "growth_score": 15.252525252525253,
+      "engagement_score": 6.662542963510191,
+      "ddai": 43.279039123964694
+    },
+    {
+      "year_month": "2020-08",
+      "volume_score": 5.776965265082267,
+      "sentiment_score": 14.153460545628834,
+      "growth_score": 8.24,
+      "engagement_score": 7.594045681887488,
+      "ddai": 35.76447149259859
+    },
+    {
+      "year_month": "2020-09",
+      "volume_score": 5.996343692870202,
+      "sentiment_score": 14.048723329727466,
+      "growth_score": 10.526315789473687,
+      "engagement_score": 6.068079090176894,
+      "ddai": 36.63946190224825
+    },
+    {
+      "year_month": "2020-10",
+      "volume_score": 4.972577696526509,
+      "sentiment_score": 14.021669038198526,
+      "growth_score": 7.606837606837607,
+      "engagement_score": 4.2745325559167044,
+      "ddai": 30.875616897479347
+    },
+    {
+      "year_month": "2020-11",
+      "volume_score": 8.263254113345521,
+      "sentiment_score": 14.201675588420626,
+      "growth_score": 18.737864077669904,
+      "engagement_score": 5.066037416316396,
+      "ddai": 46.26883119575245
+    },
+    {
+      "year_month": "2020-12",
+      "volume_score": 3.217550274223035,
+      "sentiment_score": 14.123513165674769,
+      "growth_score": 0.6756756756756759,
+      "engagement_score": 5.522066341363794,
+      "ddai": 23.538805456937276
+    },
+    {
+      "year_month": "2021-01",
+      "volume_score": 3.6563071297989036,
+      "sentiment_score": 14.216597154619858,
+      "growth_score": 11.518987341772153,
+      "engagement_score": 5.787619694362029,
+      "ddai": 35.17951132055295
+    },
+    {
+      "year_month": "2021-02",
+      "volume_score": 2.7056672760511886,
+      "sentiment_score": 14.247188212413635,
+      "growth_score": 6.9411764705882355,
+      "engagement_score": 5.56736301026753,
+      "ddai": 29.46139496932059
+    },
+    {
+      "year_month": "2021-03",
+      "volume_score": 6.654478976234005,
+      "sentiment_score": 14.396442259164084,
+      "growth_score": 20.0,
+      "engagement_score": 5.876131993528986,
+      "ddai": 46.92705322892708
+    },
+    {
+      "year_month": "2021-04",
+      "volume_score": 4.2413162705667276,
+      "sentiment_score": 14.284980278953428,
+      "growth_score": 4.761904761904763,
+      "engagement_score": 5.491062372252084,
+      "ddai": 28.779263683677
+    },
+    {
+      "year_month": "2021-05",
+      "volume_score": 5.045703839122487,
+      "sentiment_score": 13.987687601020701,
+      "growth_score": 12.36559139784946,
+      "engagement_score": 6.904003713785021,
+      "ddai": 38.30298655177767
+    },
+    {
+      "year_month": "2021-06",
+      "volume_score": 7.897623400365632,
+      "sentiment_score": 14.428041482305193,
+      "growth_score": 17.5,
+      "engagement_score": 6.005417282514756,
+      "ddai": 45.83108216518558
+    },
+    {
+      "year_month": "2021-07",
+      "volume_score": 7.312614259597807,
+      "sentiment_score": 14.088288548547249,
+      "growth_score": 8.881118881118882,
+      "engagement_score": 6.081710951975069,
+      "ddai": 36.363732641239004
+    },
+    {
+      "year_month": "2021-08",
+      "volume_score": 4.16819012797075,
+      "sentiment_score": 14.34386967528526,
+      "growth_score": 3.6296296296296293,
+      "engagement_score": 6.484856764761796,
+      "ddai": 28.626546197647436
+    },
+    {
+      "year_month": "2021-09",
+      "volume_score": 2.998171846435101,
+      "sentiment_score": 14.09065345405905,
+      "growth_score": 6.521739130434783,
+      "engagement_score": 5.596388776928103,
+      "ddai": 29.206953207857033
+    },
+    {
+      "year_month": "2021-10",
+      "volume_score": 1.4625228519195614,
+      "sentiment_score": 13.822003691924701,
+      "growth_score": 4.473684210526317,
+      "engagement_score": 5.824281690127062,
+      "ddai": 25.582492444497642
+    },
+    {
+      "year_month": "2021-11",
+      "volume_score": 8.775137111517367,
+      "sentiment_score": 14.24862829698132,
+      "growth_score": 20.0,
+      "engagement_score": 5.401498588501777,
+      "ddai": 48.42526399700047
+    },
+    {
+      "year_month": "2021-12",
+      "volume_score": 2.4131627056672764,
+      "sentiment_score": 14.076868129727037,
+      "growth_score": 0.0,
+      "engagement_score": 5.487942188473232,
+      "ddai": 21.97797302386755
+    },
+    {
+      "year_month": "2022-01",
+      "volume_score": 3.1444241316270567,
+      "sentiment_score": 14.349185772547354,
+      "growth_score": 12.941176470588236,
+      "engagement_score": 7.023777235139239,
+      "ddai": 37.45856360990189
+    },
+    {
+      "year_month": "2022-02",
+      "volume_score": 3.0712979890310788,
+      "sentiment_score": 14.232403342575221,
+      "growth_score": 9.743589743589745,
+      "engagement_score": 4.834975153835392,
+      "ddai": 31.882266229031433
+    },
+    {
+      "year_month": "2022-03",
+      "volume_score": 3.7294332723948815,
+      "sentiment_score": 14.143649637406776,
+      "growth_score": 12.337662337662337,
+      "engagement_score": 3.7618956457945005,
+      "ddai": 33.97264089325849
+    },
+    {
+      "year_month": "2022-04",
+      "volume_score": 2.047531992687386,
+      "sentiment_score": 14.432522813342864,
+      "growth_score": 4.651162790697675,
+      "engagement_score": 4.10139262737226,
+      "ddai": 25.232610224100185
+    },
+    {
+      "year_month": "2022-05",
+      "volume_score": 2.340036563071298,
+      "sentiment_score": 14.046655516104913,
+      "growth_score": 11.26984126984127,
+      "engagement_score": 5.597285142176556,
+      "ddai": 33.25381849119404
+    },
+    {
+      "year_month": "2022-06",
+      "volume_score": 1.9012797074954297,
+      "sentiment_score": 13.77979218958245,
+      "growth_score": 8.208955223880597,
+      "engagement_score": 5.091439162397747,
+      "ddai": 28.981466283356227
+    },
+    {
+      "year_month": "2022-07",
+      "volume_score": 2.925045703839123,
+      "sentiment_score": 14.531913583597454,
+      "growth_score": 14.59016393442623,
+      "engagement_score": 6.629453756282269,
+      "ddai": 38.67657697814507
+    },
+    {
+      "year_month": "2022-08",
+      "volume_score": 3.5831809872029257,
+      "sentiment_score": 13.901097457153456,
+      "growth_score": 12.400000000000004,
+      "engagement_score": 5.375395748958488,
+      "ddai": 35.25967419331487
+    },
+    {
+      "year_month": "2022-09",
+      "volume_score": 9.43327239488117,
+      "sentiment_score": 14.162899036541216,
+      "growth_score": 20.0,
+      "engagement_score": 5.294948245393541,
+      "ddai": 48.891119676815926
+    },
+    {
+      "year_month": "2022-10",
+      "volume_score": 3.510054844606947,
+      "sentiment_score": 14.414418635276427,
+      "growth_score": 0.12195121951219506,
+      "engagement_score": 4.177913938647197,
+      "ddai": 22.224338638042767
+    },
+    {
+      "year_month": "2022-11",
+      "volume_score": 8.043875685557586,
+      "sentiment_score": 14.203915970667476,
+      "growth_score": 20.0,
+      "engagement_score": 5.287205872460791,
+      "ddai": 47.53499752868585
+    },
+    {
+      "year_month": "2022-12",
+      "volume_score": 2.7056672760511886,
+      "sentiment_score": 14.011827445622645,
+      "growth_score": 0.0,
+      "engagement_score": 6.29441753885294,
+      "ddai": 23.011912260526774
+    },
+    {
+      "year_month": "2023-01",
+      "volume_score": 5.776965265082267,
+      "sentiment_score": 14.193602356709933,
+      "growth_score": 20.0,
+      "engagement_score": 5.244619812654653,
+      "ddai": 45.215187434446854
+    },
+    {
+      "year_month": "2023-02",
+      "volume_score": 5.630712979890312,
+      "sentiment_score": 14.12643436069264,
+      "growth_score": 9.649122807017543,
+      "engagement_score": 3.4835142149469274,
+      "ddai": 32.889784362547424
+    },
+    {
+      "year_month": "2023-03",
+      "volume_score": 5.2650822669104205,
+      "sentiment_score": 14.128389119050212,
+      "growth_score": 9.10714285714286,
+      "engagement_score": 4.801702450996817,
+      "ddai": 33.30231669410031
+    },
+    {
+      "year_month": "2023-04",
+      "volume_score": 3.6563071297989036,
+      "sentiment_score": 14.044105542877741,
+      "growth_score": 5.88785046728972,
+      "engagement_score": 3.9313374513207595,
+      "ddai": 27.519600591287123
+    },
+    {
+      "year_month": "2023-05",
+      "volume_score": 3.217550274223035,
+      "sentiment_score": 13.825121679547467,
+      "growth_score": 8.588235294117649,
+      "engagement_score": 5.898324820883898,
+      "ddai": 31.529232068772046
+    },
+    {
+      "year_month": "2023-06",
+      "volume_score": 4.680073126142596,
+      "sentiment_score": 14.217445856267753,
+      "growth_score": 15.063291139240505,
+      "engagement_score": 4.210408453066918,
+      "ddai": 38.17121857471777
+    },
+    {
+      "year_month": "2023-07",
+      "volume_score": 3.290676416819013,
+      "sentiment_score": 14.316793053156136,
+      "growth_score": 6.161616161616162,
+      "engagement_score": 6.621578125279834,
+      "ddai": 30.39066375687115
+    },
+    {
+      "year_month": "2023-08",
+      "volume_score": 4.826325411334553,
+      "sentiment_score": 14.235589930156669,
+      "growth_score": 15.25,
+      "engagement_score": 5.559905114511505,
+      "ddai": 39.87182045600272
+    },
+    {
+      "year_month": "2023-09",
+      "volume_score": 2.340036563071298,
+      "sentiment_score": 13.917621294685425,
+      "growth_score": 3.2673267326732685,
+      "engagement_score": 4.828437863678017,
+      "ddai": 24.353422454108006
+    },
+    {
+      "year_month": "2023-10",
+      "volume_score": 3.5831809872029257,
+      "sentiment_score": 14.191903338195441,
+      "growth_score": 15.074626865671645,
+      "engagement_score": 5.1435794320728965,
+      "ddai": 37.99329062314291
+    },
+    {
+      "year_month": "2023-11",
+      "volume_score": 6.288848263254113,
+      "sentiment_score": 14.199456801395831,
+      "growth_score": 18.809523809523807,
+      "engagement_score": 6.439019873727998,
+      "ddai": 45.736848747901746
+    },
+    {
+      "year_month": "2023-12",
+      "volume_score": 4.021937842778793,
+      "sentiment_score": 14.270851071373622,
+      "growth_score": 4.876033057851239,
+      "engagement_score": 5.977112928181032,
+      "ddai": 29.145934900184685
+    },
+    {
+      "year_month": "2024-01",
+      "volume_score": 2.340036563071298,
+      "sentiment_score": 14.027851931315698,
+      "growth_score": 4.888888888888889,
+      "engagement_score": 4.795277932239392,
+      "ddai": 26.052055315515275
+    },
+    {
+      "year_month": "2024-02",
+      "volume_score": 3.217550274223035,
+      "sentiment_score": 13.964209081770496,
+      "growth_score": 13.582089552238807,
+      "engagement_score": 6.3658206007488305,
+      "ddai": 37.12966950898117
+    },
+    {
+      "year_month": "2024-03",
+      "volume_score": 6.1425959780621575,
+      "sentiment_score": 15.043949095196513,
+      "growth_score": 20.0,
+      "engagement_score": 9.237822616145536,
+      "ddai": 50.42436768940421
+    },
+    {
+      "year_month": "2024-04",
+      "volume_score": 7.678244972577698,
+      "sentiment_score": 14.593007290182175,
+      "growth_score": 13.529411764705884,
+      "engagement_score": 7.503275281413678,
+      "ddai": 43.303939308879436
+    },
+    {
+      "year_month": "2024-05",
+      "volume_score": 8.409506398537479,
+      "sentiment_score": 14.707728765410756,
+      "growth_score": 11.428571428571429,
+      "engagement_score": 9.006471056763301,
+      "ddai": 43.55227764928297
+    },
+    {
+      "year_month": "2024-06",
+      "volume_score": 3.510054844606947,
+      "sentiment_score": 15.183247442185571,
+      "growth_score": 1.066666666666667,
+      "engagement_score": 8.205670755850145,
+      "ddai": 27.96563970930933
+    },
+    {
+      "year_month": "2024-07",
+      "volume_score": 4.387568555758683,
+      "sentiment_score": 14.657619082162743,
+      "growth_score": 12.891566265060243,
+      "engagement_score": 7.27931620643853,
+      "ddai": 39.2160701094202
+    },
+    {
+      "year_month": "2024-08",
+      "volume_score": 7.824497257769654,
+      "sentiment_score": 14.412528303525205,
+      "growth_score": 19.894736842105264,
+      "engagement_score": 6.218639884198165,
+      "ddai": 48.350402287598286
+    },
+    {
+      "year_month": "2024-09",
+      "volume_score": 6.873857404021938,
+      "sentiment_score": 14.277968438833343,
+      "growth_score": 8.169014084507044,
+      "engagement_score": 6.822445247516217,
+      "ddai": 36.14328517487854
+    },
+    {
+      "year_month": "2024-10",
+      "volume_score": 11.846435100548447,
+      "sentiment_score": 14.650574950772022,
+      "growth_score": 20.0,
+      "engagement_score": 7.873959924674058,
+      "ddai": 54.370969975994534
+    },
+    {
+      "year_month": "2024-11",
+      "volume_score": 7.751371115173675,
+      "sentiment_score": 14.542416764015233,
+      "growth_score": 4.314720812182742,
+      "engagement_score": 7.057090079814208,
+      "ddai": 33.665598771185856
+    },
+    {
+      "year_month": "2024-12",
+      "volume_score": 6.2157221206581355,
+      "sentiment_score": 14.43799492301065,
+      "growth_score": 7.0212765957446805,
+      "engagement_score": 7.460194605050463,
+      "ddai": 35.135188244463926
+    },
+    {
+      "year_month": "2025-01",
+      "volume_score": 5.118829981718465,
+      "sentiment_score": 14.696905908216747,
+      "growth_score": 7.5,
+      "engagement_score": 7.419290772103874,
+      "ddai": 34.73502666203909
+    },
+    {
+      "year_month": "2025-02",
+      "volume_score": 4.2413162705667276,
+      "sentiment_score": 15.153107048837454,
+      "growth_score": 7.714285714285714,
+      "engagement_score": 10.0,
+      "ddai": 37.1087090336899
+    },
+    {
+      "year_month": "2025-03",
+      "volume_score": 4.387568555758683,
+      "sentiment_score": 15.399665448788364,
+      "growth_score": 10.43010752688172,
+      "engagement_score": 9.450572564532205,
+      "ddai": 39.66791409596097
+    },
+    {
+      "year_month": "2025-04",
+      "volume_score": 3.8025594149908595,
+      "sentiment_score": 14.57715593121909,
+      "growth_score": 8.31578947368421,
+      "engagement_score": 8.034566554349217,
+      "ddai": 34.73007137424338
+    },
+    {
+      "year_month": "2025-05",
+      "volume_score": 2.7787934186471666,
+      "sentiment_score": 14.697295505086036,
+      "growth_score": 6.781609195402298,
+      "engagement_score": 7.233762816720196,
+      "ddai": 31.49146093585569
+    },
+    {
+      "year_month": "2025-06",
+      "volume_score": 3.1444241316270567,
+      "sentiment_score": 14.27410287490869,
+      "growth_score": 11.369863013698632,
+      "engagement_score": 6.05609994326639,
+      "ddai": 34.84448996350077
+    },
+    {
+      "year_month": "2025-07",
+      "volume_score": 2.7056672760511886,
+      "sentiment_score": 14.991719561371537,
+      "growth_score": 8.461538461538463,
+      "engagement_score": 9.887674926290712,
+      "ddai": 36.0466002252519
+    },
+    {
+      "year_month": "2025-08",
+      "volume_score": 7.385740402193784,
+      "sentiment_score": 14.168589211158892,
+      "growth_score": 20.0,
+      "engagement_score": 6.688903832197146,
+      "ddai": 48.243233445549826
+    },
+    {
+      "year_month": "2025-09",
+      "volume_score": 1.5356489945155394,
+      "sentiment_score": 14.635077075719831,
+      "growth_score": 0.0,
+      "engagement_score": 6.392314969040432,
+      "ddai": 22.563041039275802
+    },
+    {
+      "year_month": "2025-10",
+      "volume_score": 5.118829981718465,
+      "sentiment_score": 14.19455577294486,
+      "growth_score": 20.0,
+      "engagement_score": 6.126010879579226,
+      "ddai": 45.43939663424255
+    },
+    {
+      "year_month": "2025-11",
+      "volume_score": 4.680073126142596,
+      "sentiment_score": 14.655074813892314,
+      "growth_score": 8.857142857142858,
+      "engagement_score": 7.887520311416129,
+      "ddai": 36.0798111085939
+    },
+    {
+      "year_month": "2025-12",
+      "volume_score": 0.7312614259597807,
+      "sentiment_score": 14.078060825895058,
+      "growth_score": 0.0,
+      "engagement_score": 7.50673370677507,
+      "ddai": 22.31605595862991
+    },
+    {
+      "year_month": "2026-01",
+      "volume_score": 5.703839122486289,
+      "sentiment_score": 14.715395806523551,
+      "growth_score": 20.0,
+      "engagement_score": 7.58179403538359,
+      "ddai": 48.00102896439343
+    },
+    {
+      "year_month": "2026-02",
+      "volume_score": 40.0,
+      "sentiment_score": 14.633059009054488,
+      "growth_score": 20.0,
+      "engagement_score": 8.187252336367152,
+      "ddai": 82.82031134542164
+    },
+    {
+      "year_month": "2026-03",
+      "volume_score": 13.96709323583181,
+      "sentiment_score": 14.180658418060979,
+      "growth_score": 0.0,
+      "engagement_score": 5.8067105108047805,
+      "ddai": 33.954462164697574
+    },
+    {
+      "year_month": "2026-04",
+      "volume_score": 10.310786106032907,
+      "sentiment_score": 14.363152508405369,
+      "growth_score": 5.575221238938053,
+      "engagement_score": 5.880780317782652,
+      "ddai": 36.129940171158985
+    },
+    {
+      "year_month": "2026-05",
+      "volume_score": 11.407678244972578,
+      "sentiment_score": 14.181238646748293,
+      "growth_score": 11.704545454545455,
+      "engagement_score": 5.269237179634016,
+      "ddai": 42.56269952590034
+    },
+    {
+      "year_month": "2026-06",
+      "volume_score": 23.18098720292505,
+      "sentiment_score": 14.515615614552194,
+      "growth_score": 20.0,
+      "engagement_score": 6.26601832915591,
+      "ddai": 63.962621146633154
+    }
+  ],
+  "misinformation": {
+    "rate_percent": 23.183872088981577,
+    "status": "concerning"
+  }
+}

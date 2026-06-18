@@ -1,0 +1,12 @@
+{
+  "phase": "F2_Veracity_Validation",
+  "timestamp": "2026-06-15T23:30:12.014697",
+  "inter_rater_reliability": {
+    "total_samples": 300,
+    "agreement_pct": 81.33333333333333,
+    "cohens_kappa": 0.5439368026712273,
+    "agreement_strength": "Moderate",
+    "status": "revision_needed"
+  },
+  "gold_standard_records": 300
+}
