@@ -43,7 +43,7 @@ Proyek ini merupakan **analisis big data komprehensif** tentang persepsi, sentim
 
 ### Timeline Data
 - **Periode:** 2011 - 2026
-- **Total Records:** 4,296 records
+- **Total Records:** 125.420 records
 - **Update Frequency:** Monthly
 
 ---
